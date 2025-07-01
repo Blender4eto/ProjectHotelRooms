@@ -16,6 +16,7 @@ namespace ProjectHotelRooms
         public bool Occupied { get; set; }
         public string GuestName { get; set; }
 
+        // TODO: Check what in the constructor shouldnt be get / what should be randomized, etc.
         public Room(int roomNum, string type, int capacity, decimal pricePerNight, bool occupied, string guestName)
         {
 

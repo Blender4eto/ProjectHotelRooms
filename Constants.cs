@@ -8,6 +8,7 @@ namespace ProjectHotelRooms
 {
     public class Constants
     {
-        public const string filePath = "../../../books.txt";
+        // TODO: Check if the file path is correct and what file should be used in the future
+        public const string filePath = "../../../rooms.txt";
     }
 }
