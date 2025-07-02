@@ -39,7 +39,10 @@ namespace ProjectHotelRooms
             using (reader)
             {
                 string jsonData = reader.ReadToEnd();
+                if (!string.IsNullOrEmpty(jsonData))
+                {
                 Rooms = JsonSerializer.Deserialize<List<Room>>(jsonData)!;
+                }
             }
             Rooms ??= new List<Room>();
         }
