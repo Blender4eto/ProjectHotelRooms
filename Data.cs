@@ -62,5 +62,61 @@ namespace ProjectHotelRooms
             }
         }
 
+        public void ReservateRoom()
+        {
+            List<Room> availableRooms = new List<Room>();
+
+            foreach (var room in Rooms)
+            {
+                if (!room.Occupied)
+                {
+                    availableRooms.Add(room);
+                }
+            }
+
+            if (availableRooms.Count == 0)
+            {
+                Console.WriteLine("Sorry, no available rooms to reserve.");
+                return;
+            }
+
+            Console.WriteLine("Available rooms:");
+            foreach (var room in availableRooms)
+            {
+                Console.WriteLine($"Room {room.RoomNumber} - {room.Type} - Capacity: {room.Capacity} - Price: {room.PricePerNight:C}");
+            }
+
+            Console.Write("Enter the room number you want to reserve: ");
+            string input = Console.ReadLine();
+
+            if (!int.TryParse(input, out int selectedRoomNumber))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid room number.");
+                return;
+            }
+
+            Room roomToReserve = null;
+            foreach (var room in availableRooms)
+            {
+                if (room.RoomNumber == selectedRoomNumber)
+                {
+                    roomToReserve = room;
+                    break;
+                }
+            }
+
+            Console.Write("Enter your name: ");
+            string guestName = Console.ReadLine();
+
+            roomToReserve.Occupied = true;
+            roomToReserve.GuestName = guestName;
+            Save();
+        }
+
+        
+
+        
+
+
     }
 }
