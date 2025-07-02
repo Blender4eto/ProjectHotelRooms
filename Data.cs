@@ -47,6 +47,7 @@ namespace ProjectHotelRooms
             Rooms ??= new List<Room>();
         }
 
+        //------------------------------------------------------------------------
         public void DisplayRoomsAll()
         {
             foreach (var room in Rooms)
