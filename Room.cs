@@ -16,7 +16,7 @@ namespace ProjectHotelRooms
         public bool Occupied { get; set; }
         public string GuestName { get; set; }
 
-        public Room(int roomNum, string type, int capacity, decimal pricePerNight, bool occupied, string guestName)
+        public Room(int RoomNumber, string Type, int Capacity, decimal PricePerNight, bool Occupied, string GuestName)
         {
             this.RoomNumber = RoomNumber;
             this.Type = Type;
@@ -25,6 +25,5 @@ namespace ProjectHotelRooms
             this.Occupied = Occupied;
             this.GuestName = GuestName;
         }
-
     }
 }
