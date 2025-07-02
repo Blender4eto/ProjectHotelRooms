@@ -14,7 +14,7 @@ namespace ProjectHotelRooms
     public  class Data
     {
         public List<Room> Rooms { get; private set; }
-        public List<Room> DefaultRooms { get; private set; };
+        public List<Room> DefaultRooms { get; private set; }
 
         private StreamReader reader;
         private StreamWriter writer;
