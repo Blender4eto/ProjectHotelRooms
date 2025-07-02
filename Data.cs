@@ -155,7 +155,7 @@ namespace ProjectHotelRooms
             Save();
         }
 
-        public void LeaveRoom()
+        public void ExitRoom()
         {
             List<Room> unavailableRooms = new List<Room>();
 
