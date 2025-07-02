@@ -11,7 +11,6 @@ namespace ProjectHotelRooms
     {
         private static Data data = new Data();
 
-        // TODO: Add >>> to all Console.WriteLine()s for consistency
         public void DisplayMenu()
         {
             Console.WriteLine("-----------------Хотел Черноморец-----------------");
@@ -61,7 +60,7 @@ namespace ProjectHotelRooms
                 {
                     roomToReservate.Occupied = true;
                     roomToReservate.GuestName = guestName;
-                    Console.WriteLine($">>>Стая номер {roomToReservate.RoomNumber} е успешно резервирана за {guestName}.");
+                    Console.WriteLine($"Стая номер {roomToReservate.RoomNumber} е успешно резервирана за {guestName}.");
                 }
                 else
                 {
@@ -264,10 +263,10 @@ namespace ProjectHotelRooms
 
         //----------------------Return to default rooms------------------------------------
 
-        public void ReturnToDefaultRooms()
+        public void ResetToDefaultRooms()
         {
-            Console.WriteLine();
-            Console.WriteLine("----Връщане на списъка на стаите по умолчание-----");
+            Console.WriteLine("Връщане на списъка на стаите по умолчание...");
+            data.ResetRoomsToDefault();
         }
 
         //----------------------Remove room------------------------------------

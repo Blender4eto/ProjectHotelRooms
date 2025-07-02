@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ProjectHotelRooms
 {
@@ -22,7 +23,6 @@ namespace ProjectHotelRooms
         public Data()
         {
             LoadRooms();
-            LoadDefaultRooms();
         }
 
         //-------------Main file operations----------------
@@ -53,28 +53,13 @@ namespace ProjectHotelRooms
 
         //-------------Default file operations----------------
 
-        public void SaveDefaultRooms()
+        public void ResetRoomsToDefault()
         {
-            writer = new StreamWriter(DefaultRoomsFilePath);
-            using (writer)
-            {
-                string defJsonData = JsonSerializer.Serialize(DefaultRooms);
-                writer.Write(defJsonData);
-            }
-        }
+            // Копирай defaultRooms.json върху rooms.json (презапис)
+            File.Copy(DefaultRoomsFilePath, filePath, overwrite: true);
 
-        public void LoadDefaultRooms()
-        {
-            reader = new StreamReader(DefaultRoomsFilePath);
-            using (reader)
-            {
-                string defJsonData = reader.ReadToEnd();
-                if (!string.IsNullOrEmpty(DefaultRoomsFilePath))
-                {
-                    DefaultRooms = JsonSerializer.Deserialize<List<Room>>(DefaultRoomsFilePath)!;
-                }
-            }
-            DefaultRooms ??= new List<Room>();
+            // Зареди отново стаите в паметта
+            LoadRooms();
         }
 
         //-------------Display methods----------------
