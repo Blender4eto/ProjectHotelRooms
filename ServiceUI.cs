@@ -24,6 +24,8 @@ namespace ProjectHotelRooms
             Console.Write("Моля въведете желаемата от вас услуга: ");
         }
 
+        //----------------------Reservate room------------------------------------
+
         public void ReservateRoom()
         {
             Console.WriteLine();
@@ -35,23 +37,23 @@ namespace ProjectHotelRooms
             if (availableRooms.Count != 0)
             {
                 Console.Write("Моля въведете името на госта, който резервира стаята: ");
-                string guestName = Console.ReadLine();
+                string guestName = Console.ReadLine().ToLower();
                 Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
                 int roomNumber = int.Parse(Console.ReadLine());
-                Room roomToReserve = null;
+                Room roomToReservate = null;
                 foreach (Room room in data.Rooms)
                 {
                     if (room.RoomNumber == roomNumber && !room.Occupied)
                     {
-                        roomToReserve = room;
+                        roomToReservate = room;
                         break;
                     }
                 }
-                if (roomToReserve != null)
+                if (roomToReservate != null)
                 {
-                    roomToReserve.Occupied = true;
-                    roomToReserve.GuestName = guestName;
-                    Console.WriteLine($"Стая номер {roomToReserve.RoomNumber} е успешно резервирана за {guestName}.");
+                    roomToReservate.Occupied = true;
+                    roomToReservate.GuestName = guestName;
+                    Console.WriteLine($"Стая номер {roomToReservate.RoomNumber} е успешно резервирана за {guestName}.");
                 }
                 else
                 {
@@ -61,6 +63,8 @@ namespace ProjectHotelRooms
             }
             Console.WriteLine();
         }
+
+        //----------------------Leave room------------------------------------
 
         public void LeaveRoom()
         {
@@ -73,7 +77,7 @@ namespace ProjectHotelRooms
             if (occupiedRooms.Count != 0)
             {
                 Console.Write("Моля въведете името на госта, който освобождава стаята: ");
-                string guestName = Console.ReadLine();
+                string guestName = Console.ReadLine().ToLower();
                 Room roomToLeave = null;
                 foreach (Room room in data.Rooms)
                 {
@@ -91,13 +95,15 @@ namespace ProjectHotelRooms
                 }
                 else
                 {
-                    Console.WriteLine("Няма намерени стаи за освобождаване с това име.");
+                    Console.WriteLine("Няма намерени стаи за освобождаване с гост с това име.");
                 }
                 data.Save();
             }
-            
+
             Console.WriteLine();
         }
+
+        //----------------------Avaible rooms------------------------------------
 
         public void DisplayAvaibleRoomUI()
         {
@@ -122,6 +128,9 @@ namespace ProjectHotelRooms
                 }
             }
         }
+
+        //----------------------Occupied rooms------------------------------------
+
         public void DisplayOccupiedRoomUI()
         {
             Console.WriteLine();
@@ -144,6 +153,19 @@ namespace ProjectHotelRooms
                     Console.WriteLine($"| Стая номер {room.RoomNumber}, Вид: {room.Type}, Гост: {room.GuestName}");
                 }
             }
+        }
+
+        //----------------------Admin Panel------------------------------------
+
+
+        public void AdminPanel()
+        {
+            Console.WriteLine();
+            Console.WriteLine("---------------Админ панел----------------");
+            Console.WriteLine("Тук ще бъдат добавени админ функции.");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine();
+            DisplayMenu();
         }
     }
 }

@@ -29,6 +29,7 @@
                         serviceUI.DisplayMenu();
                         break;
                     case "5": //Admin panel
+                        serviceUI.AdminPanel();
                         break;
                     default:
                         Console.WriteLine("Въведохте невалиден избор, моля опитайте отново");
