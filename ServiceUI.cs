@@ -265,6 +265,7 @@ namespace ProjectHotelRooms
 
         public void ResetToDefaultRooms()
         {
+            // TODO: Add confirmation prompt
             Console.WriteLine("Връщане на списъка на стаите по умолчание...");
             data.ResetRoomsToDefault();
         }
