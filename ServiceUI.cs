@@ -81,6 +81,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("--------------------------------------------------");
 
             List<Room> occupiedRooms = data.DisplayOccupiedRooms();
+            List<Room> occupiedRoomsByPerson = new List<Room>();
 
             if (occupiedRooms.Count != 0)
             {
@@ -93,13 +94,45 @@ namespace ProjectHotelRooms
                 {
                     if (room.GuestName == guestName && room.Occupied)
                     {
-                        roomToLeave = room;
-                        break;
+                        occupiedRoomsByPerson.Add(room);
                     }
                 }
 
-                if (roomToLeave != null)
+                if (occupiedRoomsByPerson != null && occupiedRoomsByPerson.Count > 1)
                 {
+                    Console.WriteLine("Списък с резервациите на госта:");
+                    foreach (var room in occupiedRoomsByPerson)
+                    {
+                        Console.WriteLine($"| Стая номер {room.RoomNumber}, Вид: {room.Type}, Гост: {room.GuestName}");
+                    }
+                    Console.WriteLine("--------------------------------------------------");
+                    Console.Write("Въведете коя от резервациите на госта да се освободи: ");
+                    // TODO: Make it not crashing if not int
+                    int roomNumber = int.Parse(Console.ReadLine());
+
+                    foreach (Room room in data.Rooms)
+                    {
+                        if (room.RoomNumber == roomNumber && room.Occupied)
+                        {
+                            roomToLeave = room;
+                            break;
+                        }
+                    }
+
+                    if (roomToLeave != null)
+                    {
+                        roomToLeave.Occupied = false;
+                        roomToLeave.GuestName = null;
+                        Console.WriteLine($"Стая номер {roomToLeave.RoomNumber} е успешно освободена.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Стая с този номер не е намерена или вече е свободна.");
+                    }
+                }
+                else if (occupiedRoomsByPerson != null && occupiedRoomsByPerson.Count == 1)
+                {
+                    roomToLeave = occupiedRoomsByPerson[0];
                     roomToLeave.Occupied = false;
                     roomToLeave.GuestName = null;
                     Console.WriteLine($"Стая номер {roomToLeave.RoomNumber} е успешно освободена.");
