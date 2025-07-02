@@ -43,7 +43,7 @@ namespace ProjectHotelRooms
             Rooms ??= new List<Room>();
         }
 
-        public void DisplayRooms()
+        public void DisplayRoomsAll()
         {
             foreach (var room in Rooms)
             {
@@ -61,7 +61,49 @@ namespace ProjectHotelRooms
                    
             }
         }
+        public void DisplayRoomsAvaliable()
+        {
+            foreach (var room in Rooms)
+            {
+                if (!room.Occupied)
+                {
+                    Console.WriteLine($"Room {room.RoomNumber} - {room.Type}");
+                    Console.WriteLine($"  Capacity: {room.Capacity}");
+                    Console.WriteLine($"  Price per night: {room.PricePerNight:C}");
+                    Console.WriteLine($"  Occupied: {(room.Occupied ? "Yes" : "No")}");
+                    if (room.Occupied)
+                    {
+                        Console.WriteLine($"  Guest Name: {room.GuestName}");
+                        Console.WriteLine("");
+                    }
+                    else { Console.WriteLine(""); }
+                }
+                
 
+            }
+        }
+
+        public void DisplayRoomsUnavaliable()
+        {
+            foreach (var room in Rooms)
+            {
+                if (room.Occupied)
+                {
+                    Console.WriteLine($"Room {room.RoomNumber} - {room.Type}");
+                    Console.WriteLine($"  Capacity: {room.Capacity}");
+                    Console.WriteLine($"  Price per night: {room.PricePerNight:C}");
+                    Console.WriteLine($"  Occupied: {(room.Occupied ? "Yes" : "No")}");
+                    if (room.Occupied)
+                    {
+                        Console.WriteLine($"  Guest Name: {room.GuestName}");
+                        Console.WriteLine("");
+                    }
+                    else { Console.WriteLine(""); }
+                }
+
+
+            }
+        }
         public void ReservateRoom()
         {
             List<Room> availableRooms = new List<Room>();
@@ -113,9 +155,58 @@ namespace ProjectHotelRooms
             Save();
         }
 
-        
+        public void LeaveRoom()
+        {
+            List<Room> unavailableRooms = new List<Room>();
 
-        
+            foreach (var room in Rooms)
+            {
+                if (room.Occupied)
+                {
+                    unavailableRooms.Add(room);
+                }
+            }
+
+            if (unavailableRooms.Count == 0)
+            {
+                Console.WriteLine("Sorry,all rooms are available rooms to reserve.");
+                return;
+            }
+
+            Console.WriteLine("Unavailable rooms:");
+            foreach (var room in unavailableRooms)
+            {
+                Console.WriteLine($"Room {room.RoomNumber} - {room.Type} - Capacity: {room.Capacity} - Price: {room.PricePerNight:C}");
+            }
+
+            Console.Write("Enter the room number you want to Leave: ");
+            string input = Console.ReadLine();
+
+            if (!int.TryParse(input, out int selectedRoomNumber))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid room number.");
+                return;
+            }
+
+            Room roomToLeave = null;
+            foreach (var room in unavailableRooms)
+            {
+                if (room.RoomNumber == selectedRoomNumber)
+                {
+                    roomToLeave= room;
+                    break;
+                }
+            }
+
+            
+
+            roomToLeave.Occupied = false;
+            roomToLeave.GuestName = "";
+            Save();
+        }
+
+
+
 
 
     }
