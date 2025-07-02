@@ -33,7 +33,9 @@ namespace ProjectHotelRooms
             Console.WriteLine("Списък със свободни стаи:");
             DisplayAvaibleRoom();
             Console.WriteLine("--------------------------------------------------");
+
             List<Room> availableRooms = data.DisplayAvaibleRooms();
+
             if (availableRooms.Count != 0)
             {
                 Console.Write("Моля въведете името на госта, който резервира стаята: ");
@@ -41,7 +43,9 @@ namespace ProjectHotelRooms
                 Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
                 // TODO: Make it not crashing if not int
                 int roomNumber = int.Parse(Console.ReadLine());
+
                 Room roomToReservate = null;
+
                 foreach (Room room in data.Rooms)
                 {
                     if (room.RoomNumber == roomNumber && !room.Occupied)
@@ -50,6 +54,7 @@ namespace ProjectHotelRooms
                         break;
                     }
                 }
+
                 if (roomToReservate != null)
                 {
                     roomToReservate.Occupied = true;
@@ -74,12 +79,16 @@ namespace ProjectHotelRooms
             Console.WriteLine("Списък със заети стаи:");
             DisplayOccupiedRoom();
             Console.WriteLine("--------------------------------------------------");
+
             List<Room> occupiedRooms = data.DisplayOccupiedRooms();
+
             if (occupiedRooms.Count != 0)
             {
                 Console.Write("Моля въведете името на госта, който освобождава стаята: ");
                 string guestName = Console.ReadLine().ToLower();
+
                 Room roomToLeave = null;
+
                 foreach (Room room in data.Rooms)
                 {
                     if (room.GuestName == guestName && room.Occupied)
@@ -88,6 +97,7 @@ namespace ProjectHotelRooms
                         break;
                     }
                 }
+
                 if (roomToLeave != null)
                 {
                     roomToLeave.Occupied = false;
@@ -100,7 +110,6 @@ namespace ProjectHotelRooms
                 }
                 data.Save();
             }
-
             Console.WriteLine();
         }
 
@@ -117,6 +126,7 @@ namespace ProjectHotelRooms
         public void DisplayAvaibleRoom()
         {
             List<Room> availableRooms = data.DisplayAvaibleRooms();
+
             if (availableRooms.Count == 0)
             {
                 Console.WriteLine("Няма свободни стаи.");
@@ -143,6 +153,7 @@ namespace ProjectHotelRooms
         public void DisplayOccupiedRoom()
         {
             List<Room> occupiedRooms = data.DisplayOccupiedRooms();
+
             if (occupiedRooms.Count == 0)
             {
                 Console.WriteLine("Няма заети стаи.");
