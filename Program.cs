@@ -14,9 +14,11 @@
                     case "1": //Reservation
                         Console.WriteLine("Свободни стаи за резервиране:");
                         ReservateRoom();
+                        data.Save();
                         break;
                     case "2": //Exit from room
                         ExitRoom();
+                        data.Save();
                         break;
                     case "3": //Check avaible rooms and prices
                         DisplayAvaibleRoomUI();
