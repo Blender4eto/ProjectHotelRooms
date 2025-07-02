@@ -39,6 +39,7 @@ namespace ProjectHotelRooms
                 Console.Write("Моля въведете името на госта, който резервира стаята: ");
                 string guestName = Console.ReadLine().ToLower();
                 Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
+                // TODO: Make it not crashing if not int
                 int roomNumber = int.Parse(Console.ReadLine());
                 Room roomToReservate = null;
                 foreach (Room room in data.Rooms)
@@ -157,15 +158,78 @@ namespace ProjectHotelRooms
 
         //----------------------Admin Panel------------------------------------
 
+        public const string AdminPassword = "Password";
 
-        public void AdminPanel()
+        public bool EnterAdminPanel()
         {
             Console.WriteLine();
-            Console.WriteLine("---------------Админ панел----------------");
-            Console.WriteLine("Тук ще бъдат добавени админ функции.");
-            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("-------------------Админ панел--------------------");
+            Console.Write("Въведете парола: ");
+            if (Console.ReadLine() == AdminPassword)
+            {
+                DisplayAdminMenu();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Невалидна парола, вие ще бъдете върнати в главното меню.");
+                Console.WriteLine();
+                return false;
+            }
+        }
+
+        public void DisplayAdminMenu()
+        {
             Console.WriteLine();
-            DisplayMenu();
+            Console.WriteLine("------------Добре дошли в админ панела------------");
+            Console.WriteLine("1. Резервиране на всички стаи");
+            Console.WriteLine("2. Освобождаване на всички стаи");
+            Console.WriteLine("3. Добавяне на стая");
+            Console.WriteLine("4. Премахване на стая");
+            Console.WriteLine("5. Връщане на списъка на стаите по умолчание");
+            Console.WriteLine("6. Изход от админ панела");
+            Console.WriteLine("--------------------------------------------------");
+            Console.Write("Моля въведете вашия избор: ");
+        }
+
+        //----------------------Reservate all rooms------------------------------------
+
+        public void ReservateAllRooms()
+        {
+            Console.WriteLine();
+            Console.WriteLine("------------Резервиране на всички стаи------------");
+        }
+
+        //----------------------Leave all rooms------------------------------------
+
+        public void LeaveAllRooms()
+        {
+            Console.WriteLine();
+            Console.WriteLine("------Освобождаване на няколко стаи наведнъж------");
+        }
+
+        //----------------------Add room------------------------------------
+
+        public void AddRoom(Room room)
+        {
+            Console.WriteLine();
+            Console.WriteLine("--------------Създаване на нова стая--------------");
+        }
+
+        //----------------------Remove room------------------------------------
+
+        public void RemoveRoom(int roomNumber)
+        {
+            Console.WriteLine();
+            Console.WriteLine("----------------Премахване на стая----------------");
+        }
+
+        //----------------------Return to default rooms------------------------------------
+
+        public void ReturnToDefaultRooms()
+        {
+            Console.WriteLine();
+            Console.WriteLine("----Връщане на списъка на стаите по умолчание-----");
         }
     }
 }

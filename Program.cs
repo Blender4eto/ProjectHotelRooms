@@ -29,10 +29,45 @@
                         serviceUI.DisplayMenu();
                         break;
                     case "5": //Admin panel
-                        serviceUI.AdminPanel();
-                        break;
+                        {
+                            if(!serviceUI.EnterAdminPanel())
+                            {
+                                serviceUI.DisplayMenu();
+                                break;
+                            }
+                            string adminChoice = Console.ReadLine();
+                            switch (adminChoice)
+                            {
+                                case "1":
+                                    serviceUI.DisplayAdminMenu();
+                                    break;
+                                case "2":
+                                    serviceUI.DisplayAdminMenu();
+                                    break;
+                                case "3":
+                                    serviceUI.DisplayAdminMenu();
+                                    break;
+                                case "4":
+                                    serviceUI.DisplayAdminMenu();
+                                    break;
+                                case "5":
+                                    serviceUI.DisplayAdminMenu();
+                                    break;
+                                case "6":
+                                    Console.WriteLine("Излизане от админ панела...");
+                                    Console.WriteLine();
+                                    serviceUI.DisplayMenu();
+                                    break;
+                                default:
+                                    Console.WriteLine("Въведохте невалидена опция, моля опитайте отново");
+                                    Console.WriteLine();
+                                    serviceUI.DisplayAdminMenu();
+                                    break;
+                            }
+                            break;
+                        }
                     default:
-                        Console.WriteLine("Въведохте невалиден избор, моля опитайте отново");
+                        Console.WriteLine("Въведохте невалидена опция, моля опитайте отново");
                         Console.WriteLine();
                         serviceUI.DisplayMenu();
                         break;
