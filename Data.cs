@@ -126,7 +126,7 @@ namespace ProjectHotelRooms
                 return;
             }
 
-            Console.WriteLine("Available rooms:");
+            
             foreach (var room in availableRooms)
             {
                 Console.WriteLine($"Room {room.RoomNumber} - {room.Type} - Capacity: {room.Capacity} - Price: {room.PricePerNight:C}");
@@ -177,7 +177,6 @@ namespace ProjectHotelRooms
                 return;
             }
 
-            Console.WriteLine("Unavailable rooms:");
             foreach (var room in unavailableRooms)
             {
                 Console.WriteLine($"Room {room.RoomNumber} - {room.Type} - Capacity: {room.Capacity} - Price: {room.PricePerNight:C}");
