@@ -47,6 +47,7 @@ namespace ProjectHotelRooms
         {
             foreach (var room in Rooms)
             {
+
                 Console.WriteLine($"Room {room.RoomNumber} - {room.Type}");
                 Console.WriteLine($"  Capacity: {room.Capacity}");
                 Console.WriteLine($"  Price per night: {room.PricePerNight:C}");
@@ -54,8 +55,10 @@ namespace ProjectHotelRooms
                 if (room.Occupied)
                 {
                     Console.WriteLine($"  Guest Name: {room.GuestName}");
+                    Console.WriteLine("");
                 }
-                Console.WriteLine(new string('-', 30));
+                else { Console.WriteLine(""); }
+                   
             }
         }
 

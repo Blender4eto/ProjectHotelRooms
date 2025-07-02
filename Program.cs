@@ -6,7 +6,11 @@
         {
             Console.WriteLine("Hello, World!");
 
-            Data.DisplayRooms();
+            Data data = new Data(); // Loads rooms from JSON
+            data.DisplayRooms();    // Displays rooms to CMD
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
 
         }
     }

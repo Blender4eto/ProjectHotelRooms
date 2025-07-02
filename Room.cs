@@ -16,15 +16,14 @@ namespace ProjectHotelRooms
         public bool Occupied { get; set; }
         public string GuestName { get; set; }
 
-        public Room(int roomNum, string type, int capacity, decimal pricePerNight, bool occupied, string guestName)
+        public Room(int RoomNumber, string Type, int Capacity, decimal PricePerNight, bool Occupied, string GuestName)
         {
-
-            RoomNumber = roomNum;
-            Type = type;
-            Capacity = capacity;
-            PricePerNight = pricePerNight;
-            Occupied = occupied;
-            GuestName = guestName;
+            this.RoomNumber = RoomNumber;
+            this.Type = Type;
+            this.Capacity = Capacity;
+            this.PricePerNight = PricePerNight;
+            this.Occupied = Occupied;
+            this.GuestName = GuestName;
         }
 
     }
