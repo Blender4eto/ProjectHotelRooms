@@ -18,6 +18,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("2. Освобождаване на стая");
             Console.WriteLine("3. Проверка на наличността и цените на стаите");
             Console.WriteLine("4. Справка за заетите стаи и техните гости");
+            Console.WriteLine("5. Админ панел");
             Console.WriteLine("x. Изход от програмата");
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете желаемата от вас услуга: ");
@@ -30,22 +31,34 @@ namespace ProjectHotelRooms
             Console.WriteLine("Списък със свободни стаи:");
             DisplayAvaibleRoom();
             Console.WriteLine("--------------------------------------------------");
-            Console.Write("Моля въведете името на госта, който резервира стаята: ");
-            string guestName = Console.ReadLine();
-            Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
-            int roomNumber = int.Parse(Console.ReadLine());
-            Room roomToReserve = data.Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber && !r.Occupied);
-            if (roomToReserve != null)
+            List<Room> availableRooms = data.DisplayAvaibleRooms();
+            if (availableRooms.Count != 0)
             {
-                roomToReserve.Occupied = true;
-                roomToReserve.GuestName = guestName;
-                Console.WriteLine($"Стая номер {roomToReserve.RoomNumber} е успешно резервирана за {guestName}.");
+                Console.Write("Моля въведете името на госта, който резервира стаята: ");
+                string guestName = Console.ReadLine();
+                Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
+                int roomNumber = int.Parse(Console.ReadLine());
+                Room roomToReserve = null;
+                foreach (Room room in data.Rooms)
+                {
+                    if (room.RoomNumber == roomNumber && !room.Occupied)
+                    {
+                        roomToReserve = room;
+                        break;
+                    }
+                }
+                if (roomToReserve != null)
+                {
+                    roomToReserve.Occupied = true;
+                    roomToReserve.GuestName = guestName;
+                    Console.WriteLine($"Стая номер {roomToReserve.RoomNumber} е успешно резервирана за {guestName}.");
+                }
+                else
+                {
+                    Console.WriteLine("Стая с този номер не е намерена или вече е заета.");
+                }
+                data.Save();
             }
-            else
-            {
-                Console.WriteLine("Стая с този номер не е намерена или вече е заета.");
-            }
-            data.Save();
             Console.WriteLine();
         }
 
@@ -55,20 +68,34 @@ namespace ProjectHotelRooms
             Console.WriteLine("---------------Освобождаване на стая--------------");
             Console.WriteLine("Списък със заети стаи:");
             DisplayOccupiedRoom();
-            Console.Write("Моля въведете името на госта, който освобождава стаята: ");
-            string guestName = Console.ReadLine();
-            Room roomToLeave = data.Rooms.FirstOrDefault(r => r.GuestName == guestName && r.Occupied);
-            if (roomToLeave != null)
+            Console.WriteLine("--------------------------------------------------");
+            List<Room> occupiedRooms = data.DisplayOccupiedRooms();
+            if (occupiedRooms.Count != 0)
             {
-                roomToLeave.Occupied = false;
-                roomToLeave.GuestName = null;
-                Console.WriteLine($"Стая номер {roomToLeave.RoomNumber} е успешно освободена.");
+                Console.Write("Моля въведете името на госта, който освобождава стаята: ");
+                string guestName = Console.ReadLine();
+                Room roomToLeave = null;
+                foreach (Room room in data.Rooms)
+                {
+                    if (room.GuestName == guestName && room.Occupied)
+                    {
+                        roomToLeave = room;
+                        break;
+                    }
+                }
+                if (roomToLeave != null)
+                {
+                    roomToLeave.Occupied = false;
+                    roomToLeave.GuestName = null;
+                    Console.WriteLine($"Стая номер {roomToLeave.RoomNumber} е успешно освободена.");
+                }
+                else
+                {
+                    Console.WriteLine("Няма намерени стаи за освобождаване с това име.");
+                }
+                data.Save();
             }
-            else
-            {
-                Console.WriteLine("Няма намерени стаи за освобождаване с това име.");
-            }
-            data.Save();
+            
             Console.WriteLine();
         }
 

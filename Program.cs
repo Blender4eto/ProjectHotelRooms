@@ -14,12 +14,10 @@
                 {
                     case "1": //Reservation
                         serviceUI.ReservateRoom();
-                        data.Save();
                         serviceUI.DisplayMenu();
                         break;
                     case "2": //Leave room
                         serviceUI.LeaveRoom();
-                        data.Save();
                         serviceUI.DisplayMenu();
                         break;
                     case "3": //Check avaible rooms and prices
@@ -28,6 +26,13 @@
                         break;
                     case "4": //Check occupied rooms ant their occupiers
                         serviceUI.DisplayOccupiedRoomUI();
+                        serviceUI.DisplayMenu();
+                        break;
+                    case "5": //Admin panel
+                        break;
+                    default:
+                        Console.WriteLine("Въведохте невалиден избор, моля опитайте отново");
+                        Console.WriteLine();
                         serviceUI.DisplayMenu();
                         break;
 
