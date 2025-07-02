@@ -42,5 +42,22 @@ namespace ProjectHotelRooms
             }
             Rooms ??= new List<Room>();
         }
+
+        public void DisplayRooms()
+        {
+            foreach (var room in Rooms)
+            {
+                Console.WriteLine($"Room {room.RoomNumber} - {room.Type}");
+                Console.WriteLine($"  Capacity: {room.Capacity}");
+                Console.WriteLine($"  Price per night: {room.PricePerNight:C}");
+                Console.WriteLine($"  Occupied: {(room.Occupied ? "Yes" : "No")}");
+                if (room.Occupied)
+                {
+                    Console.WriteLine($"  Guest Name: {room.GuestName}");
+                }
+                Console.WriteLine(new string('-', 30));
+            }
+        }
+
     }
 }
