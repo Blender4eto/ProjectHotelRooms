@@ -27,6 +27,10 @@
                         data.DisplayRoomsUnavaliable();
                         break;
 
+                    case "5": //check occupied rooms ant their occupiers
+                        data.DisplayRoomsAll();
+                        break;
+
                 }
             }
         }
