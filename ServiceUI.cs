@@ -10,6 +10,8 @@ namespace ProjectHotelRooms
     public class ServiceUI
     {
         private static Data data = new Data();
+
+        // TODO: Add >>> to all Console.WriteLine()s for consistency
         public void DisplayMenu()
         {
             Console.WriteLine("-----------------Хотел Черноморец-----------------");
@@ -59,7 +61,7 @@ namespace ProjectHotelRooms
                 {
                     roomToReservate.Occupied = true;
                     roomToReservate.GuestName = guestName;
-                    Console.WriteLine($"Стая номер {roomToReservate.RoomNumber} е успешно резервирана за {guestName}.");
+                    Console.WriteLine($">>>Стая номер {roomToReservate.RoomNumber} е успешно резервирана за {guestName}.");
                 }
                 else
                 {
@@ -260,20 +262,20 @@ namespace ProjectHotelRooms
             Console.WriteLine("--------------Създаване на нова стая--------------");
         }
 
-        //----------------------Remove room------------------------------------
-
-        public void RemoveRoom(int roomNumber)
-        {
-            Console.WriteLine();
-            Console.WriteLine("----------------Премахване на стая----------------");
-        }
-
         //----------------------Return to default rooms------------------------------------
 
         public void ReturnToDefaultRooms()
         {
             Console.WriteLine();
             Console.WriteLine("----Връщане на списъка на стаите по умолчание-----");
+        }
+
+        //----------------------Remove room------------------------------------
+
+        public void RemoveRoom(int roomNumber)
+        {
+            Console.WriteLine();
+            Console.WriteLine("----------------Премахване на стая----------------");
         }
     }
 }

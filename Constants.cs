@@ -9,5 +9,6 @@ namespace ProjectHotelRooms
     public class Constants
     {
         public const string filePath = "../../../rooms.json";
+        public const string DefaultRoomsFilePath = "../../../defaultRooms.json";
     }
 }

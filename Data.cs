@@ -14,6 +14,7 @@ namespace ProjectHotelRooms
     public  class Data
     {
         public List<Room> Rooms { get; private set; }
+        public List<Room> DefaultRooms { get; private set; };
 
         private StreamReader reader;
         private StreamWriter writer;
@@ -21,7 +22,10 @@ namespace ProjectHotelRooms
         public Data()
         {
             LoadRooms();
+            LoadDefaultRooms();
         }
+
+        //-------------Main file operations----------------
 
         public void Save()
         {
@@ -46,6 +50,34 @@ namespace ProjectHotelRooms
             }
             Rooms ??= new List<Room>();
         }
+
+        //-------------Default file operations----------------
+
+        public void SaveDefaultRooms()
+        {
+            writer = new StreamWriter(DefaultRoomsFilePath);
+            using (writer)
+            {
+                string defJsonData = JsonSerializer.Serialize(DefaultRooms);
+                writer.Write(defJsonData);
+            }
+        }
+
+        public void LoadDefaultRooms()
+        {
+            reader = new StreamReader(DefaultRoomsFilePath);
+            using (reader)
+            {
+                string defJsonData = reader.ReadToEnd();
+                if (!string.IsNullOrEmpty(DefaultRoomsFilePath))
+                {
+                    DefaultRooms = JsonSerializer.Deserialize<List<Room>>(DefaultRoomsFilePath)!;
+                }
+            }
+            DefaultRooms ??= new List<Room>();
+        }
+
+        //-------------Display methods----------------
 
         public List<Room> DisplayAvaibleRooms()
         {
