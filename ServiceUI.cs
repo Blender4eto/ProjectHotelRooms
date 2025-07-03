@@ -13,6 +13,7 @@ namespace ProjectHotelRooms
 
         public void DisplayMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("-----------------Хотел Черноморец-----------------");
             Console.WriteLine("Списък с предлагани услуги:");
             Console.WriteLine("1. Резервиране на стая");
@@ -23,6 +24,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("x. Изход от програмата");
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете желаемата от вас услуга: ");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //----------------------Reservate room------------------------------------
@@ -229,7 +231,7 @@ namespace ProjectHotelRooms
         public const string AdminPassword = "salam";
 
         public bool EnterAdminPanel()
-        {
+        {   
             Console.WriteLine();
             Console.WriteLine("-------------------Админ панел--------------------");
             Console.Write("Въведете парола: ");
@@ -248,6 +250,7 @@ namespace ProjectHotelRooms
 
         public void DisplayAdminMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
             Console.WriteLine("------------Добре дошли в админ панела------------");
             Console.WriteLine("1. Резервиране на всички стаи");
@@ -259,6 +262,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("7. Изход от админ панела");
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете вашия избор: ");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //----------------------Reservate all rooms------------------------------------
