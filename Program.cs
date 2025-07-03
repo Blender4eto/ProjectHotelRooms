@@ -47,8 +47,8 @@
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "2":
-                                        serviceUI.DisplayAdminMenu();
                                         serviceUI.LeaveAllRooms();
+                                        serviceUI.DisplayAdminMenu();
                                         break;
                                     case "3":
                                         serviceUI.DisplayAdminMenu();
