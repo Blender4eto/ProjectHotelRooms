@@ -39,10 +39,7 @@ namespace ProjectHotelRooms
 
             if (availableRooms.Count != 0)
             {
-                Console.Write("Моля въведете името на госта, който резервира стаята: ");
-                string guestName = Console.ReadLine().ToLower();
                 Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
-
                 int roomNumber;
                 try
                 {
@@ -54,6 +51,8 @@ namespace ProjectHotelRooms
                     Console.WriteLine();
                     return;
                 }
+                Console.Write("Моля въведете името на госта, който резервира стаята: ");
+                string guestName = Console.ReadLine().ToLower();
 
                 Room roomToReservate = null;
 
@@ -224,7 +223,7 @@ namespace ProjectHotelRooms
 
         //----------------------Admin Panel------------------------------------
 
-        public const string AdminPassword = "Password";
+        public const string AdminPassword = "salam";
 
         public bool EnterAdminPanel()
         {
