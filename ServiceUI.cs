@@ -261,21 +261,37 @@ namespace ProjectHotelRooms
             Console.WriteLine("--------------Създаване на нова стая--------------");
         }
 
-        //----------------------Return to default rooms------------------------------------
-
-        public void ResetToDefaultRooms()
-        {
-            // TODO: Add confirmation prompt
-            Console.WriteLine("Връщане на списъка на стаите по умолчание...");
-            data.ResetRoomsToDefault();
-        }
-
         //----------------------Remove room------------------------------------
 
         public void RemoveRoom(int roomNumber)
         {
             Console.WriteLine();
             Console.WriteLine("----------------Премахване на стая----------------");
+        }
+
+        //----------------------Return to default rooms------------------------------------
+
+        public void ResetToDefaultRooms()
+        {
+            Console.Write("Сигурни ли сте, че желаете да възстановите списъка със стаите (да/не): ");
+            string confirmation = Console.ReadLine()?.ToLower();
+            switch (confirmation)
+            {
+                case "да":
+                case "da":
+                case "yes":
+                    data.ResetRoomsToDefault();
+                    Console.WriteLine("Възстановяване на списъка...");
+                    break;
+                case "не":
+                case "ne":
+                case "no":
+                    Console.WriteLine("Възстановяването е отменено.");
+                    break;
+                default:
+                    Console.WriteLine("Невалиден отговор. Вие ще бъдете върнати в админ панела.");
+                    break;
+            }
         }
     }
 }
