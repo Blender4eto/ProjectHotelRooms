@@ -269,8 +269,16 @@ namespace ProjectHotelRooms
 
         public void LeaveAllRooms()
         {
+            // TODO: add a option to leave selected rooms
             Console.WriteLine();
-            Console.WriteLine("------Освобождаване на няколко стаи наведнъж------");
+            Console.WriteLine("-----------Освобождаване на всички стаи-----------");
+            foreach (var room in data.Rooms)
+            {
+                room.Occupied = false;
+                room.GuestName = null;
+            }
+            Console.WriteLine("Всички стаи са освободени.");
+            data.Save();
         }
 
         //----------------------Add room------------------------------------
