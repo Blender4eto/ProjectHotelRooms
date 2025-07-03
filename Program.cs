@@ -43,37 +43,41 @@
                                 adminChoice = Console.ReadLine();
                                 switch (adminChoice)
                                 {
-                                    case "1":
+                                    case "1": //Display all rooms
+                                        serviceUI.DisplayAllRoomsUI();
+                                        serviceUI.DisplayAdminMenu();
+                                        break;
+                                    case "2": //Reservate all free rooms under one guest
                                         serviceUI.ReservateAllRooms();
                                         serviceUI.DisplayAdminMenu();
                                         break;
-                                    case "2":
+                                    case "3": //Leave all rooms
                                         serviceUI.LeaveAllRooms();
                                         serviceUI.DisplayAdminMenu();
                                         break;
-                                    case "3":
+                                    case "4": //Add room
                                         serviceUI.AddRoom();
                                         serviceUI.DisplayAdminMenu();
                                         break;
-                                    case "4":
+                                    case "5": //Edit room
                                         serviceUI.EditRoom();
                                         serviceUI.DisplayAdminMenu();
                                         break;
-                                    case "5":
+                                    case "6": //Remove room
                                         serviceUI.RemoveRoom();
                                         serviceUI.DisplayAdminMenu();
                                         break;
-                                    case "6":
+                                    case "7": //Reset rooms to default
                                         serviceUI.ResetToDefaultRooms();
                                         serviceUI.DisplayAdminMenu();
                                         break;
-                                    case "7":
+                                    case "8": //Exit admin panel
                                         Console.WriteLine("Излизане от админ панела...");
                                         Console.WriteLine();
                                         serviceUI.DisplayMenu();
                                         exitAdminPanel = true;
                                         break;
-                                    default:
+                                    default: // Invalid option
                                         Console.WriteLine("Въведохте невалидена опция, моля опитайте отново");
                                         Console.WriteLine();
                                         serviceUI.DisplayAdminMenu();
@@ -82,7 +86,7 @@
                             }
                             break;
                         }
-                    default:
+                    default: // Invalid option
                         Console.WriteLine("Въведохте невалидена опция, моля опитайте отново");
                         Console.WriteLine();
                         serviceUI.DisplayMenu();

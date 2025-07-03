@@ -59,6 +59,10 @@ namespace ProjectHotelRooms
         }
 
         //-------------Display methods----------------
+        public List<Room> DisplayAllRooms()
+        {
+            return Rooms;
+        }
 
         public List<Room> DisplayAvaibleRooms()
         {

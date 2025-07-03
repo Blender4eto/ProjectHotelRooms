@@ -23,7 +23,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("5. Админ панел");
             Console.WriteLine("x. Изход от програмата");
             Console.WriteLine("--------------------------------------------------");
-            Console.Write("Моля въведете желаемата от вас услуга: ");
+            Console.Write("Моля въведете вашия избор: ");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -172,6 +172,37 @@ namespace ProjectHotelRooms
             Console.WriteLine();
         }
 
+        //----------------------All rooms------------------------------------
+
+        public void DisplayAllRoomsUI()
+        {
+            Console.WriteLine();
+            Console.WriteLine("--------------Списък със всички стаи--------------");
+            DisplayAllRooms();
+            Console.WriteLine();
+        }
+
+        public void DisplayAllRooms()
+        {
+            List<Room> allRooms = data.DisplayAllRooms();
+            if (allRooms.Count == 0)
+            {
+                Console.WriteLine("Няма налични стаи.");
+            }
+            else
+            {
+                foreach (var room in allRooms)
+                {
+                    if(room.Occupied)
+                        Console.WriteLine($"| Стая номер {room.RoomNumber}, Вид: {room.Type}, Цена: {room.PricePerNight} лв. на нощувка, Статус: Заета, Гост: {room.GuestName}");
+                    else
+                    {
+                        Console.WriteLine($"| Стая номер {room.RoomNumber}, Вид: {room.Type}, Цена: {room.PricePerNight} лв. на нощувка, Статус: Свободна, Гост: Няма");
+                    }
+                }
+            }
+        }
+
         //----------------------Avaible rooms------------------------------------
 
         public void DisplayAvaibleRoomUI()
@@ -253,13 +284,14 @@ namespace ProjectHotelRooms
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
             Console.WriteLine("------------Добре дошли в админ панела------------");
-            Console.WriteLine("1. Резервиране на всички стаи");
-            Console.WriteLine("2. Освобождаване на всички стаи");
-            Console.WriteLine("3. Добавяне на стая");
-            Console.WriteLine("4. Редактиране на стая");
-            Console.WriteLine("5. Премахване на стая");
-            Console.WriteLine("6. Връщане на списъка на стаите по умолчание");
-            Console.WriteLine("7. Изход от админ панела");
+            Console.WriteLine("1. Справка за всички стаи");
+            Console.WriteLine("2. Резервиране на всички стаи");
+            Console.WriteLine("3. Освобождаване на всички стаи");
+            Console.WriteLine("4. Добавяне на стая");
+            Console.WriteLine("5. Редактиране на стая");
+            Console.WriteLine("6. Премахване на стая");
+            Console.WriteLine("7. Връщане на списъка на стаите по умолчание");
+            Console.WriteLine("8. Изход от админ панела");
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете вашия избор: ");
             Console.ForegroundColor = ConsoleColor.White;
@@ -427,7 +459,7 @@ namespace ProjectHotelRooms
                     Console.WriteLine("Цената на стаята трябва да бъде положително число. Операцията е прекратена.");
                     return;
                 }
-                pricePerNight = Math.Round(pricePerNight, 2);
+                pricePerNight = Math.Round(pricePerNight, 2); //not workin fully, maybe it will be deleted later
             }
             catch
             {
@@ -479,22 +511,52 @@ namespace ProjectHotelRooms
             data.Save();
         }
 
-        //----------------------Remove room------------------------------------
-
-        public void RemoveRoom()
-        {
-            Console.WriteLine();
-            Console.WriteLine("----------------Премахване на стая----------------");
-            Console.WriteLine("Функцията все още не е на лице.");
-        }
-
         //----------------------Edit room------------------------------------
 
         public void EditRoom()
         {
             Console.WriteLine();
             Console.WriteLine("---------------Редактиране на стая----------------");
-            Console.WriteLine("Функцията все още не е на лице.");
+            Console.WriteLine("Списък със стаи:");
+            DisplayAllRooms();
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("Въведете номера на стаята, която желаете да редактирате");
+
+        }
+
+        //----------------------Remove room------------------------------------
+
+        public void RemoveRoom()
+        {
+            Console.WriteLine();
+            Console.WriteLine("----------------Премахване на стая----------------");
+            Console.WriteLine("Въведете номера на стаята, която желаете да премахнете");
+            int roomNumber;
+            try
+            {
+                roomNumber = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Невалиден номер на стая. Операцията е прекратена.");
+                return;
+            }
+
+            if (!data.Rooms.Any(r => r.RoomNumber == roomNumber))
+            {
+                Console.WriteLine("Стая с този номер не съществува. Операцията е прекратена.");
+                return;
+            }
+            foreach (Room room in data.Rooms)
+            {
+                if (room.RoomNumber == roomNumber)
+                {
+                    data.Rooms.Remove(room);
+                    Console.WriteLine($"Стая номер {room.RoomNumber} е успешно премахната.");
+                    data.Save();
+                    return;
+                }
+            }
         }
 
         //----------------------Return to default rooms------------------------------------
