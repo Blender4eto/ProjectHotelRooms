@@ -42,8 +42,18 @@ namespace ProjectHotelRooms
                 Console.Write("Моля въведете името на госта, който резервира стаята: ");
                 string guestName = Console.ReadLine().ToLower();
                 Console.Write("Моля въведете номера на стаята, която искате да резервирате: ");
-                // TODO: Make it not crashing if not int
-                int roomNumber = int.Parse(Console.ReadLine());
+
+                int roomNumber;
+                try
+                {
+                    roomNumber = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Невалиден номер. Операцията е прекратена.");
+                    Console.WriteLine();
+                    return;
+                }
 
                 Room roomToReservate = null;
 
@@ -101,6 +111,7 @@ namespace ProjectHotelRooms
 
                 if (occupiedRoomsByPerson != null && occupiedRoomsByPerson.Count > 1)
                 {
+                    Console.WriteLine("Гостът има няколко резервации.");
                     Console.WriteLine("Списък с резервациите на госта:");
                     foreach (var room in occupiedRoomsByPerson)
                     {
@@ -108,8 +119,18 @@ namespace ProjectHotelRooms
                     }
                     Console.WriteLine("--------------------------------------------------");
                     Console.Write("Въведете коя от резервациите на госта да се освободи: ");
-                    // TODO: Make it not crashing if not int
-                    int roomNumber = int.Parse(Console.ReadLine());
+
+                    int roomNumber;
+                    try
+                    { 
+                        roomNumber = int.Parse(Console.ReadLine()); 
+                    }
+                    catch 
+                    {
+                        Console.WriteLine("Невалиден номер на стая. Моля, опитайте отново.");
+                        Console.WriteLine();
+                        return;
+                    }
 
                     foreach (Room room in data.Rooms)
                     {
