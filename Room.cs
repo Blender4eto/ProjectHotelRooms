@@ -16,7 +16,6 @@ namespace ProjectHotelRooms
         public bool Occupied { get; set; }
         public string GuestName { get; set; }
 
-        // TODO: Check what in the constructor shouldnt be get / what should be randomized, etc.
         public Room(int RoomNumber, string Type, int Capacity, decimal PricePerNight, bool Occupied, string GuestName)
         {
 
@@ -27,6 +26,5 @@ namespace ProjectHotelRooms
             this.Occupied = Occupied;
             this.GuestName = GuestName;
         }
-
     }
 }

@@ -52,16 +52,22 @@
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "3":
+                                        serviceUI.AddRoom();
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "4":
+                                        serviceUI.EditRoom();
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "5":
-                                        serviceUI.ResetToDefaultRooms();
+                                        serviceUI.RemoveRoom();
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "6":
+                                        serviceUI.ResetToDefaultRooms();
+                                        serviceUI.DisplayAdminMenu();
+                                        break;
+                                    case "7":
                                         Console.WriteLine("Излизане от админ панела...");
                                         Console.WriteLine();
                                         serviceUI.DisplayMenu();

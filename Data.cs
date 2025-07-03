@@ -9,7 +9,6 @@ using System.IO;
 
 namespace ProjectHotelRooms
 {
-    // TODO: Check if everything is correct, if not, fix it
     using System.Text.Json;
     using static Constants;
     public  class Data
@@ -55,10 +54,7 @@ namespace ProjectHotelRooms
 
         public void ResetRoomsToDefault()
         {
-            // Копирай defaultRooms.json върху rooms.json (презапис)
             File.Copy(DefaultRoomsFilePath, filePath, overwrite: true);
-
-            // Зареди отново стаите в паметта
             LoadRooms();
         }
 

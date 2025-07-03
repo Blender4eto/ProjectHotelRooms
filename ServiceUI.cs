@@ -53,6 +53,7 @@ namespace ProjectHotelRooms
                 }
                 Console.Write("Моля въведете името на госта, който резервира стаята: ");
                 string guestName = Console.ReadLine().ToLower();
+                guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
 
                 Room roomToReservate = null;
 
@@ -98,6 +99,7 @@ namespace ProjectHotelRooms
                 // TODO: maybe add a option to leave several rooms at once with ', ' or ',' seperator or leave all at once
                 Console.Write("Моля въведете името на госта, който освобождава стаята: ");
                 string guestName = Console.ReadLine().ToLower();
+                guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
 
                 Room roomToLeave = null;
 
@@ -251,9 +253,10 @@ namespace ProjectHotelRooms
             Console.WriteLine("1. Резервиране на всички стаи");
             Console.WriteLine("2. Освобождаване на всички стаи");
             Console.WriteLine("3. Добавяне на стая");
-            Console.WriteLine("4. Премахване на стая");
-            Console.WriteLine("5. Връщане на списъка на стаите по умолчание");
-            Console.WriteLine("6. Изход от админ панела");
+            Console.WriteLine("4. Редактиране на стая");
+            Console.WriteLine("5. Премахване на стая");
+            Console.WriteLine("6. Връщане на списъка на стаите по умолчание");
+            Console.WriteLine("7. Изход от админ панела");
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете вашия избор: ");
         }
@@ -278,6 +281,7 @@ namespace ProjectHotelRooms
                     Console.WriteLine("Името на госта не може да бъде празно. Операцията е прекратена.");
                     return;
                 }
+                guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
 
                 foreach (var room in data.Rooms)
                 {
@@ -304,6 +308,7 @@ namespace ProjectHotelRooms
             // TODO: add a option to leave selected rooms + option to kick out guest and leave all his rooms
             Console.WriteLine();
             Console.WriteLine("-----------Освобождаване на всички стаи-----------");
+
             foreach (var room in data.Rooms)
             {
                 room.Occupied = false;
@@ -315,18 +320,177 @@ namespace ProjectHotelRooms
 
         //----------------------Add room------------------------------------
 
-        public void AddRoom(Room room)
+        public void AddRoom()
         {
             Console.WriteLine();
             Console.WriteLine("--------------Създаване на нова стая--------------");
+
+            //Добавяне на номера на стаята
+            Console.Write("Моля въведете номера на стаята: ");
+            int roomNumber;
+            try
+            {
+                roomNumber = int.Parse(Console.ReadLine());
+                if (data.Rooms.Any(r => r.RoomNumber == roomNumber))
+                {
+                    Console.WriteLine("Стая с този номер вече съществува. Операцията е прекратена.");
+                    return;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Невалиден номер на стая. Операцията е прекратена.");
+                return;
+            }
+
+            //Добавяне на типа на стаята
+            Console.WriteLine("Видове стаи:");
+            Console.WriteLine("1. Единична");
+            Console.WriteLine("2. Двойна");
+            Console.WriteLine("3. Луксозна");
+            Console.WriteLine("4. Апартамент");
+            Console.WriteLine("5. Фамилна");
+            Console.WriteLine("6. Друг");
+            Console.Write("Моля въведете типа на стаята: ");
+            string type = Console.ReadLine()?.ToLower();
+            int capacity;
+            switch (type)
+            {
+                case "1":
+                    type = "Единична";
+                    capacity = 1;
+                    break;
+                case "2":
+                    type = "Двойна";
+                    capacity = 2;
+                    break;
+                case "3":
+                    type = "Луксозна";
+                    capacity = 3;
+                    break;
+                case "4":
+                    type = "Апартамент";
+                    capacity = 4;
+                    break;
+                case "5":
+                    type = "Фамилна";
+                    capacity = 5;
+                    break;
+                case "6":
+                    Console.Write("Моля въведете вашия тип на стаята: ");
+                    type = Console.ReadLine()?.ToLower();
+
+                    if (string.IsNullOrEmpty(type) || type.All(char.IsDigit))
+                    {
+                        Console.WriteLine("Типът на стаята не може да бъде празен или да съдържа число. Операцията е прекратена.");
+                        return;
+                    }
+                    type = char.ToUpper(type[0]) + type.Substring(1);
+
+                    //Добавяне на капацитета на стаята
+                    Console.Write("Моля въведете номер на капацитета на стаята: ");
+                    try
+                    {
+                        capacity = int.Parse(Console.ReadLine());
+                        if (capacity <= 0)
+                        {
+                            Console.WriteLine("Капацитетът на стаята трябва да бъде положително число. Операцията е прекратена.");
+                            return;
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Невалиден капацитет на стаята. Операцията е прекратена.");
+                        Console.WriteLine();
+                        return;
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Невалиден тип на стаята. Операцията е прекратена.");
+                    return;
+            }
+
+
+            //Добавяне на цената на стаята
+            Console.Write("Моля въведете цената на стаята за нощувка (XX.XX): ");
+            decimal pricePerNight;
+            try
+            {
+                pricePerNight = decimal.Parse(Console.ReadLine());
+                if (pricePerNight <= 0)
+                {
+                    Console.WriteLine("Цената на стаята трябва да бъде положително число. Операцията е прекратена.");
+                    return;
+                }
+                pricePerNight = Math.Round(pricePerNight, 2);
+            }
+            catch
+            {
+                Console.WriteLine("Невалидна цена на стаята. Операцията е прекратена.");
+                Console.WriteLine();
+                return;
+            }
+
+            //Добавяне на статуса на стаята
+            Console.Write("Моля въведете дали стаята да е заета (да/не): ");
+            bool isOccupied;
+            string guestName;
+            switch (Console.ReadLine()?.ToLower())
+            {
+                case "да":
+                case "da":
+                case "yes":
+                    isOccupied = true;
+                    //Добавяне на името на госта
+                    Console.Write("Моля въведете името на госта, който ще заеме стаята: ");
+                    guestName = Console.ReadLine()?.ToLower();
+
+                    if (string.IsNullOrEmpty(guestName))
+                    {
+                        Console.WriteLine("Името на госта не може да бъде празно. Операцията е прекратена.");
+                        return;
+                    }
+                    // TODO: maybe add something to prevent middle or last name to be with lower letter if there is one
+                    guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
+
+                    break;
+                case "не":
+                case "ne":
+                case "no":
+                    isOccupied = false;
+                    guestName = null;
+                    break;
+                default:
+                    Console.WriteLine("Невалиден отговор. Стаята ще бъде добавена като свободна.");
+                    isOccupied = false;
+                    guestName = null;
+                    break;
+            }
+
+            //Добавяне на новата стая
+            Room newRoom = new Room(roomNumber, type, capacity, pricePerNight, isOccupied, guestName);
+            data.Rooms.Add(newRoom);
+            Console.WriteLine($"Стая номер {newRoom.RoomNumber} е успешно добавена.");
+            data.Save();
         }
 
         //----------------------Remove room------------------------------------
 
-        public void RemoveRoom(int roomNumber)
+        public void RemoveRoom()
         {
             Console.WriteLine();
             Console.WriteLine("----------------Премахване на стая----------------");
+            Console.WriteLine("Функцията все още не е на лице.");
+        }
+
+        //----------------------Edit room------------------------------------
+
+        public void EditRoom()
+        {
+            Console.WriteLine();
+            Console.WriteLine("---------------Редактиране на стая----------------");
+            Console.WriteLine("Функцията все още не е на лице.");
         }
 
         //----------------------Return to default rooms------------------------------------
