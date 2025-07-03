@@ -264,18 +264,37 @@ namespace ProjectHotelRooms
         {
             Console.WriteLine();
             Console.WriteLine("-------Резервиране на всички свободни стаи--------");
-            Console.Write("Моля въведете името на госта, който резервира свободните стаи: ");
-            string guestName = Console.ReadLine().ToLower();
-            foreach (var room in data.Rooms)
+
+            List<Room> availableRooms = data.DisplayAvaibleRooms();
+            string guestName;
+
+            if (availableRooms.Count != 0)
             {
-                if (!room.Occupied)
+                Console.Write("Моля въведете името на госта, който резервира свободните стаи: ");
+                guestName = Console.ReadLine().ToLower();
+
+                if (string.IsNullOrEmpty(guestName))
                 {
-                    room.Occupied = true;
-                    room.GuestName = guestName;
+                    Console.WriteLine("Името на госта не може да бъде празно. Операцията е прекратена.");
+                    return;
                 }
+
+                foreach (var room in data.Rooms)
+                {
+                    if (!room.Occupied)
+                    {
+                        room.Occupied = true;
+                        room.GuestName = guestName;
+                    }
+                }
+                Console.WriteLine($"Всички свободни стаи са резервирани от {guestName}.");
+                data.Save();
             }
-            Console.WriteLine($"Всички свободни стаи са резервирани от {guestName}.");
-            data.Save();
+            else
+            {
+                Console.WriteLine("Няма свободни стаи за резервиране.");
+                return;
+            }
         }
 
         //----------------------Leave all rooms------------------------------------
