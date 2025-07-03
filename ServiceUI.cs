@@ -95,6 +95,7 @@ namespace ProjectHotelRooms
 
             if (occupiedRooms.Count != 0)
             {
+                // TODO: maybe add a option to leave several rooms at once with ', ' or ',' seperator or leave all at once
                 Console.Write("Моля въведете името на госта, който освобождава стаята: ");
                 string guestName = Console.ReadLine().ToLower();
 
@@ -110,7 +111,7 @@ namespace ProjectHotelRooms
 
                 if (occupiedRoomsByPerson != null && occupiedRoomsByPerson.Count > 1)
                 {
-                    Console.WriteLine("Гостът има няколко резервации.");
+                    Console.WriteLine($"Гостът {guestName} има {occupiedRoomsByPerson.Count} резервации.");
                     Console.WriteLine("Списък с резервациите на госта:");
                     foreach (var room in occupiedRoomsByPerson)
                     {
@@ -262,14 +263,26 @@ namespace ProjectHotelRooms
         public void ReservateAllRooms()
         {
             Console.WriteLine();
-            Console.WriteLine("------------Резервиране на всички стаи------------");
+            Console.WriteLine("-------Резервиране на всички свободни стаи--------");
+            Console.Write("Моля въведете името на госта, който резервира свободните стаи: ");
+            string guestName = Console.ReadLine().ToLower();
+            foreach (var room in data.Rooms)
+            {
+                if (!room.Occupied)
+                {
+                    room.Occupied = true;
+                    room.GuestName = guestName;
+                }
+            }
+            Console.WriteLine($"Всички свободни стаи са резервирани от {guestName}.");
+            data.Save();
         }
 
         //----------------------Leave all rooms------------------------------------
 
         public void LeaveAllRooms()
         {
-            // TODO: add a option to leave selected rooms
+            // TODO: add a option to leave selected rooms + option to kick out guest and leave all his rooms
             Console.WriteLine();
             Console.WriteLine("-----------Освобождаване на всички стаи-----------");
             foreach (var room in data.Rooms)

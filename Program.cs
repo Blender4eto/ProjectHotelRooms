@@ -44,6 +44,7 @@
                                 switch (adminChoice)
                                 {
                                     case "1":
+                                        serviceUI.ReservateAllRooms();
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "2":
