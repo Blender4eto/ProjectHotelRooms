@@ -24,8 +24,8 @@ namespace ProjectHotelRooms
             Console.WriteLine("  \\ \\/ //    \\ ) _) / (_/\\ ) _) \\ \\/ /(  O )");
             Console.WriteLine("   \\__/ \\_/\\_/(__)  \\____/(____) \\__/  \\__/ ");
             Console.WriteLine("");
-            
-            Console.ResetColor();
+
+            Console.Write("\x1b[0m");
 
 
 
@@ -43,12 +43,18 @@ namespace ProjectHotelRooms
             Console.WriteLine("3.Боровец");
             Console.WriteLine("----------------------------------------------");
             Console.Write("Моля въведете вашия избор: ");
-            Console.ResetColor();
+            Console.Write("\x1b[0m");
 
             DisplayHotels();
 
+       
 
-            Console.WriteLine(data.SelectedFilePath);
+            
+            Console.Write("Избрахте хотел ");  
+
+            Console.Write($"\x1b[38;2;217;117;177m{data.HotelName}\x1b[0m");
+
+            Console.WriteLine(); 
 
         }
 
