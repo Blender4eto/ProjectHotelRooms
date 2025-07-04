@@ -11,26 +11,96 @@ namespace ProjectHotelRooms
 
     public class ServiceUI
     {
-      
 
-        private Data data;
+        private static Data data = new Data();
+       
         private static Constants constants = new Constants();
 
-        public ServiceUI(Data data)  // Modified constructor
+        public void DisplayHotelLogo()
         {
-            this.data = data;
+            Console.Write("\x1b[38;2;153;204;255m");
+            Console.WriteLine("   _  _   __   ____  __    ____  _  _   __  ");
+            Console.WriteLine("  / )( \\ / _\\ (  __)(  )  (  __)/ )( \\ /  \\ ");
+            Console.WriteLine("  \\ \\/ //    \\ ) _) / (_/\\ ) _) \\ \\/ /(  O )");
+            Console.WriteLine("   \\__/ \\_/\\_/(__)  \\____/(____) \\__/  \\__/ ");
+            Console.WriteLine("");
+            
+            Console.ResetColor();
+
+
+
+
+
+
         }
+       
+        public void DisplayHotelsUI()
+        {
+            Console.Write("\x1b[38;2;217;117;177m");
+            Console.WriteLine("-----------------Избери Хотел-----------------");
+            Console.WriteLine("1.Черноморец");
+            Console.WriteLine("2.Фокус");
+            Console.WriteLine("3.Боровец");
+            Console.WriteLine("----------------------------------------------");
+            Console.Write("Моля въведете вашия избор: ");
+            Console.ResetColor();
+
+            DisplayHotels();
+
+
+            Console.WriteLine(data.SelectedFilePath);
+
+        }
+
+        public void DisplayHotels()
+        {
+
+
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        data.SelectedFilePath = filePath1;
+                        data.HotelName = "Черноморец";
+                        break;
+                    case 2:
+                        data.SelectedFilePath = filePath2;
+                        data.HotelName = "Фокус";
+                        break;
+                    case 3:
+                        data.SelectedFilePath = filePath3;
+                        data.HotelName = "Боровец";
+                        break;
+                    default:
+                        Console.WriteLine("Невалидна опция! Моля изберете 1-3.");
+                        break;
+                }
+                // Reload rooms after changing hotel
+                data.LoadRooms();
+            }
+            else
+            {
+                Console.WriteLine("Невалиден вход! Моля въведете число.");
+            }
+
+            
+
+        }
+
+
 
         public void DisplayMenu()
         {  
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"-----------------Хотел -----------------");
+            Console.WriteLine($"-----------------Хотел {data.HotelName}-----------------");
             Console.WriteLine("Списък с предлагани услуги:");
             Console.WriteLine("1. Резервиране на стая");
             Console.WriteLine("2. Освобождаване на стая");
             Console.WriteLine("3. Проверка на наличността и цените на стаите");
             Console.WriteLine("4. Справка за заетите стаи и техните гости");
-            Console.WriteLine("5. Админ панел");
+            Console.WriteLine("5. Смени хотел");
+            Console.WriteLine("6. Админ панел");
             Console.WriteLine("x. Изход от програмата");
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете вашия избор: ");
@@ -42,7 +112,7 @@ namespace ProjectHotelRooms
         public void ReservateRoom()
         {
             Console.WriteLine();
-            Console.WriteLine("----------------Резервиране на стая---------------");
+            Console.WriteLine($"----------------Резервиране на стая в {data.HotelName}---------------");
             Console.WriteLine("Списък със свободни стаи:");
             DisplayAvaibleRoom();
             Console.WriteLine("--------------------------------------------------");
@@ -98,7 +168,7 @@ namespace ProjectHotelRooms
         public void LeaveRoom()
         {
             Console.WriteLine();
-            Console.WriteLine("---------------Освобождаване на стая--------------");
+            Console.WriteLine($"---------------Освобождаване на стая в {data.HotelName}--------------");
 
             List<Room> occupiedRooms = data.DisplayOccupiedRooms();
             List<Room> occupiedRoomsByPerson = new List<Room>();
@@ -106,7 +176,7 @@ namespace ProjectHotelRooms
             if (occupiedRooms.Count != 0)
             {
                 // TODO: maybe add a option to leave several rooms at once with ', ' or ',' seperator or leave all at once
-                Console.WriteLine("Списък със заети стаи:");
+                Console.WriteLine($"Списък със заети стаи в {data.HotelName}:");
                 DisplayOccupiedRoom();
                 Console.WriteLine("--------------------------------------------------");
 

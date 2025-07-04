@@ -7,10 +7,11 @@
         private static Constants constants = new Constants();
         public static void Main(string[] args)
         {
-            Data data = new Data();
-            ServiceUI serviceUI = new ServiceUI(data);  // Pass Data instance
+            
+            ServiceUI serviceUI = new ServiceUI();
+            serviceUI.DisplayHotelLogo();
 
-            data.DisplayHotels();
+            serviceUI.DisplayHotelsUI();
             serviceUI.DisplayMenu();
             string choice;
             while ((choice = Console.ReadLine()) != "x")
@@ -33,7 +34,11 @@
                         serviceUI.DisplayOccupiedRoomUI();
                         serviceUI.DisplayMenu();
                         break;
-                    case "5": //Admin panel
+                    case "5": //Check occupied rooms ant their occupiers
+                        serviceUI.DisplayHotelsUI();
+                        serviceUI.DisplayMenu();
+                        break;
+                    case "6": //Admin panel
                         {
                             if(!serviceUI.EnterAdminPanel())
                             {

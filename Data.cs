@@ -31,47 +31,10 @@ namespace ProjectHotelRooms
         }
 
         //-------------Main file operations----------------
-        public void DisplayHotels()
-        {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("-----------------Избери Хотел-----------------");
-            Console.WriteLine("1.Черноморец");
-            Console.WriteLine("2. Фокус");
-            Console.WriteLine("3. Боровец");
-            Console.WriteLine("--------------------------------------------------");
-            Console.Write("Моля въведете вашия избор: ");
+     
 
-            if (int.TryParse(Console.ReadLine(), out int choice))
-            {
-                switch (choice)
-                {
-                    case 1:
-                        SelectedFilePath = filePath1;
-                        HotelName = "Черноморец";
-                        break;
-                    case 2:
-                        SelectedFilePath = filePath2;
-                        HotelName = "Фокус";
-                        break;
-                    case 3:
-                        SelectedFilePath = filePath3;
-                        HotelName = "Боровец";
-                        break;
-                    default:
-                        Console.WriteLine("Невалидна опция! Моля изберете 1-3.");
-                        break;
-                }
-                // Reload rooms after changing hotel
-                LoadRooms();
-            }
-            else
-            {
-                Console.WriteLine("Невалиден вход! Моля въведете число.");
-            }
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(SelectedFilePath);
-           
-        }
+        
+
         public void Save()
         {
             StreamWriter writer = new StreamWriter(SelectedFilePath);
