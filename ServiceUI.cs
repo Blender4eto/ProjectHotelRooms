@@ -96,6 +96,7 @@ namespace ProjectHotelRooms
         {  
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"-----------------Хотел {data.HotelName}-----------------");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Списък с предлагани услуги:");
             Console.WriteLine("1. Резервиране на стая");
             Console.WriteLine("2. Освобождаване на стая");
@@ -104,6 +105,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("5. Смени хотел");
             Console.WriteLine("6. Админ панел");
             Console.WriteLine("x. Изход от програмата");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("--------------------------------------------------");
             Console.Write("Моля въведете вашия избор: ");
             Console.ForegroundColor = ConsoleColor.White;
@@ -114,10 +116,14 @@ namespace ProjectHotelRooms
         public void ReservateRoom()
         {
             Console.WriteLine();
-            Console.WriteLine($"----------------Резервиране на стая в {data.HotelName}---------------");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"---------Резервиране на стая в {data.HotelName}---------");
+            Console.ResetColor();
             Console.WriteLine("Списък със свободни стаи:");
             DisplayAvaibleRoom();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("--------------------------------------------------");
+            Console.ResetColor();
 
             List<Room> availableRooms = data.DisplayAvaibleRooms();
 
@@ -170,7 +176,9 @@ namespace ProjectHotelRooms
         public void LeaveRoom()
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"---------------Освобождаване на стая в {data.HotelName}--------------");
+            Console.ResetColor();
 
             List<Room> occupiedRooms = data.DisplayOccupiedRooms();
             List<Room> occupiedRoomsByPerson = new List<Room>();
@@ -180,7 +188,9 @@ namespace ProjectHotelRooms
                 // TODO: maybe add a option to leave several rooms at once with ', ' or ',' seperator or leave all at once
                 Console.WriteLine($"Списък със заети стаи в {data.HotelName}:");
                 DisplayOccupiedRoom();
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("--------------------------------------------------");
+                Console.ResetColor();
 
                 Console.Write("Моля въведете името на госта, който освобождава стаята: ");
                 string guestName = Console.ReadLine().ToLower();
@@ -204,7 +214,9 @@ namespace ProjectHotelRooms
                     {
                         Console.WriteLine($"| Стая номер {room.RoomNumber}, Вид: {room.Type}, Гост: {room.GuestName}");
                     }
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("--------------------------------------------------");
+                    Console.ResetColor();
                     Console.Write("Въведете коя от резервациите на госта да се освободи: ");
 
                     int roomNumber;
@@ -264,7 +276,9 @@ namespace ProjectHotelRooms
         public void DisplayAllRoomsUI()
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("--------------Списък със всички стаи--------------");
+            Console.ResetColor();
             DisplayAllRooms();
         }
 
@@ -294,7 +308,9 @@ namespace ProjectHotelRooms
         public void DisplayAvaibleRoomUI()
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("--------------Списък със свободни стаи------------");
+            Console.ResetColor();
             DisplayAvaibleRoom();
             Console.WriteLine();
         }
@@ -321,7 +337,9 @@ namespace ProjectHotelRooms
         public void DisplayOccupiedRoomUI()
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("---------------Списък със заети стаи--------------");
+            Console.ResetColor();
             DisplayOccupiedRoom();
             Console.WriteLine();
         }
@@ -350,7 +368,9 @@ namespace ProjectHotelRooms
         public bool EnterAdminPanel()
         {   
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("-------------------Админ панел--------------------");
+            Console.ResetColor();
             Console.Write("Въведете парола: ");
             if (Console.ReadLine() == AdminPassword)
             {
