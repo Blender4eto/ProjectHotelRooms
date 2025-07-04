@@ -11,8 +11,11 @@ namespace ProjectHotelRooms
 {
     using System.Text.Json;
     using static Constants;
+    using static ServiceUI;
     public  class Data
     {
+        private static ServiceUI serviceUI = new ServiceUI();
+
         public List<Room> Rooms { get; private set; }
         public List<Room> DefaultRooms { get; private set; }
 
@@ -20,7 +23,7 @@ namespace ProjectHotelRooms
         private StreamWriter writer;
 
         public Data()
-        {
+        {   
             LoadRooms();
         }
 
@@ -28,9 +31,9 @@ namespace ProjectHotelRooms
 
         public void Save()
         {
-            StreamWriter writer = new StreamWriter(filePath);
+            StreamWriter writer = new StreamWriter(serviceUI.SelectedFilePath);
             using (writer)
-            {
+            {                                                       
                 string jsonData = JsonSerializer.Serialize(Rooms);
                 writer.Write(jsonData);
             }
@@ -38,7 +41,7 @@ namespace ProjectHotelRooms
 
         public void LoadRooms()
         {
-            reader = new StreamReader(filePath);
+            reader = new StreamReader(serviceUI.SelectedFilePath);
             using (reader)
             {
                 string jsonData = reader.ReadToEnd();
@@ -54,7 +57,7 @@ namespace ProjectHotelRooms
 
         public void ResetRoomsToDefault()
         {
-            File.Copy(DefaultRoomsFilePath, filePath, overwrite: true);
+            File.Copy(DefaultRoomsFilePath, serviceUI.SelectedFilePath, overwrite: true);
             LoadRooms();
         }
 

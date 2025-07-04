@@ -7,14 +7,58 @@ using System.Threading.Tasks;
 
 namespace ProjectHotelRooms
 {
+    using static Constants;
+
     public class ServiceUI
     {
         private static Data data = new Data();
-
-        public void DisplayMenu()
+        private static Constants constants = new Constants();
+        public string SelectedFilePath = "";
+        public string HotelName = "";
+        public void DisplayHotels()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("-----------------Хотел Черноморец-----------------");
+            Console.WriteLine("-----------------Избери Хотел-----------------");
+
+            Console.WriteLine("1.Черноморец");
+            Console.WriteLine("2. Фокус");
+            Console.WriteLine("3. Боровец");
+
+            Console.WriteLine("--------------------------------------------------");
+            Console.Write("Моля въведете вашия избор: ");
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                       SelectedFilePath = filePath1;
+                        HotelName = "Черноморец";
+                        break;
+                    case 2:
+                        SelectedFilePath = filePath2;
+                        HotelName = "Фокус";
+                        break;
+                    case 3:
+                        SelectedFilePath = filePath3;
+                        HotelName = "Боровец";
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option! Please choose 1-3.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input! Please enter a number.");
+            }
+
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public void DisplayMenu()
+        {  
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"-----------------Хотел {HotelName}-----------------");
             Console.WriteLine("Списък с предлагани услуги:");
             Console.WriteLine("1. Резервиране на стая");
             Console.WriteLine("2. Освобождаване на стая");

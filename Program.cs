@@ -4,8 +4,11 @@
     {
         private static Data data = new Data();
         private static ServiceUI serviceUI = new ServiceUI();
+        private static Constants constants = new Constants();
         public static void Main(string[] args)
         {
+
+            
             serviceUI.DisplayMenu();
             string choice;
             while ((choice = Console.ReadLine()) != "x")
