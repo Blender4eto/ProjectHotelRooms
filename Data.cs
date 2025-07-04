@@ -14,24 +14,67 @@ namespace ProjectHotelRooms
     using static ServiceUI;
     public  class Data
     {
-        private static ServiceUI serviceUI = new ServiceUI();
+        
 
         public List<Room> Rooms { get; private set; }
         public List<Room> DefaultRooms { get; private set; }
+        public string SelectedFilePath = filePath3;
+        public string HotelName = "";
 
         private StreamReader reader;
         private StreamWriter writer;
 
         public Data()
-        {   
+        {
+            
             LoadRooms();
         }
 
         //-------------Main file operations----------------
+        public void DisplayHotels()
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("-----------------Избери Хотел-----------------");
+            Console.WriteLine("1.Черноморец");
+            Console.WriteLine("2. Фокус");
+            Console.WriteLine("3. Боровец");
+            Console.WriteLine("--------------------------------------------------");
+            Console.Write("Моля въведете вашия избор: ");
 
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        SelectedFilePath = filePath1;
+                        HotelName = "Черноморец";
+                        break;
+                    case 2:
+                        SelectedFilePath = filePath2;
+                        HotelName = "Фокус";
+                        break;
+                    case 3:
+                        SelectedFilePath = filePath3;
+                        HotelName = "Боровец";
+                        break;
+                    default:
+                        Console.WriteLine("Невалидна опция! Моля изберете 1-3.");
+                        break;
+                }
+                // Reload rooms after changing hotel
+                LoadRooms();
+            }
+            else
+            {
+                Console.WriteLine("Невалиден вход! Моля въведете число.");
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(SelectedFilePath);
+           
+        }
         public void Save()
         {
-            StreamWriter writer = new StreamWriter(serviceUI.SelectedFilePath);
+            StreamWriter writer = new StreamWriter(SelectedFilePath);
             using (writer)
             {                                                       
                 string jsonData = JsonSerializer.Serialize(Rooms);
@@ -41,7 +84,7 @@ namespace ProjectHotelRooms
 
         public void LoadRooms()
         {
-            reader = new StreamReader(serviceUI.SelectedFilePath);
+            reader = new StreamReader(SelectedFilePath);
             using (reader)
             {
                 string jsonData = reader.ReadToEnd();
@@ -57,7 +100,7 @@ namespace ProjectHotelRooms
 
         public void ResetRoomsToDefault()
         {
-            File.Copy(DefaultRoomsFilePath, serviceUI.SelectedFilePath, overwrite: true);
+            File.Copy(DefaultRoomsFilePath, SelectedFilePath, overwrite: true);
             LoadRooms();
         }
 

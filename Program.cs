@@ -3,12 +3,14 @@
     internal class Program
     {
         private static Data data = new Data();
-        private static ServiceUI serviceUI = new ServiceUI();
+       
         private static Constants constants = new Constants();
         public static void Main(string[] args)
         {
+            Data data = new Data();
+            ServiceUI serviceUI = new ServiceUI(data);  // Pass Data instance
 
-            
+            data.DisplayHotels();
             serviceUI.DisplayMenu();
             string choice;
             while ((choice = Console.ReadLine()) != "x")
