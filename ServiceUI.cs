@@ -50,7 +50,7 @@ namespace ProjectHotelRooms
             
 
             DisplayHotels();
-          
+            Console.Clear();
             Console.Write("\nИзбрахте хотел ");  
             Console.WriteLine($"\x1b[38;2;217;117;177m{data.HotelName}\x1b[0m\n");
             
@@ -386,7 +386,8 @@ namespace ProjectHotelRooms
         public const string AdminPassword = "salam";
 
         public bool EnterAdminPanel()
-        {   
+        {
+            Console.Clear();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("-------------------Админ панел--------------------");
@@ -407,7 +408,7 @@ namespace ProjectHotelRooms
 
         public void DisplayAdminMenu()
         {
-            Console.Clear();
+           
             Console.Write("\x1b[38;2;217;117;177m");
             Console.WriteLine();
             Console.WriteLine($"------------Добре дошли в админ панела на хотел {data.HotelName}------------");
@@ -431,6 +432,7 @@ namespace ProjectHotelRooms
 
         public void ReservateAllRooms()
         {
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine($"-------Резервиране на всички свободни стаи в {data.HotelName}--------");
 
@@ -457,11 +459,13 @@ namespace ProjectHotelRooms
                         room.GuestName = guestName;
                     }
                 }
+                Console.Clear();
                 Console.WriteLine($"Всички свободни стаи са резервирани от {guestName}.");
                 data.Save();
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Няма свободни стаи за резервиране.");
                 return;
             }
@@ -471,7 +475,10 @@ namespace ProjectHotelRooms
 
         public void LeaveAllRooms()
         {
+            Console.Clear();
             // TODO: add a option to leave selected rooms + option to kick out guest and leave all his rooms
+            //add check if any of the rooms are already empty
+
             Console.WriteLine();
             Console.WriteLine($"-----------Освобождаване на всички стаи в {data.HotelName}-----------");
 
@@ -480,6 +487,7 @@ namespace ProjectHotelRooms
                 room.Occupied = false;
                 room.GuestName = null;
             }
+            Console.Clear();
             Console.WriteLine("Всички стаи са освободени.");
             data.Save();
         }
