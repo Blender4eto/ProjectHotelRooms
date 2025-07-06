@@ -61,36 +61,41 @@ namespace ProjectHotelRooms
 
         public void DisplayHotels()
         {
-
-
-            if (int.TryParse(Console.ReadLine(), out int choice))
+            while (true)
             {
-                switch (choice)
+                Console.WriteLine("Изберете хотел (1-3):");
+                if (int.TryParse(Console.ReadLine(), out int choice))
                 {
-                    case 1:
-                        data.SelectedFilePath = filePath1;
-                        data.HotelName = "Черноморец";
-                        break;
-                    case 2:
-                        data.SelectedFilePath = filePath2;
-                        data.HotelName = "Фокус";
-                        break;
-                    case 3:
-                        data.SelectedFilePath = filePath3;
-                        data.HotelName = "Боровец";
-                        break;
-                    default:
-                        Console.WriteLine("Невалидна опция! Моля изберете 1-3.");
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            data.SelectedFilePath = filePath1;
+                            data.HotelName = "Черноморец";
+                            data.LoadRooms();
+                            return;
+                        case 2:
+                            data.SelectedFilePath = filePath2;
+                            data.HotelName = "Фокус";
+                            data.LoadRooms();
+                            return;
+                        case 3:
+                            data.SelectedFilePath = filePath3;
+                            data.HotelName = "Боровец";
+                            data.LoadRooms();
+                            return;
+                        default:
+                            Console.WriteLine("Невалидна опция! Моля изберете 1-3.");
+                            break;
+                    }
                 }
-              
-                data.LoadRooms();
+                else
+                {
+                    Console.WriteLine("Моля въведете валидно число.");
+                }
             }
-           
-
-            
-
         }
+
+
 
 
 
