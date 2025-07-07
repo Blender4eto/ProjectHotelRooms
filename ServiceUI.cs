@@ -47,29 +47,7 @@ namespace ProjectHotelRooms
             Console.WriteLine($"{pink}----------------------------------------------{reset}");
             Console.Write($"Моля въведете вашия избор: {pink}");
 
-            string choice = Console.ReadLine();
-            switch (choice)
-            {
-                case "1":
-                    data.SelectedFilePath = filePath1;
-                    data.HotelName = "Черноморец";
-                    data.LoadRooms();
-                    return;
-                case "2":
-                    data.SelectedFilePath = filePath2;
-                    data.HotelName = "Фокус";
-                    data.LoadRooms();
-                    return;
-                case "3":
-                    data.SelectedFilePath = filePath3;
-                    data.HotelName = "Боровец";
-                    data.LoadRooms();
-                    return;
-                default:
-                    Console.WriteLine($"{red}Невалидна опция! Моля изберете 1-3.{reset}\n");
-                    break;
-            }
-
+            ChooseHotels();
             Console.Clear();
             Console.Write($"{green}Избрахте хотел {pink}{data.HotelName}{reset}\n \n");
         }
@@ -100,6 +78,7 @@ namespace ProjectHotelRooms
                             return;
                         default:
                             Console.WriteLine($"{red}Невалидна опция! Моля изберете 1-3.{reset}\n");
+                            DisplayHotelsUI();
                             break;
                     }
                 }
