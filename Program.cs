@@ -2,9 +2,6 @@
 {
     internal class Program
     {
-        private static Data data = new Data();
-       
-        private static Constants constants = new Constants();
         public static void Main(string[] args)
         {
             
@@ -58,7 +55,7 @@
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "2": //Reservate all free rooms under one guest
-                                        serviceUI.ReservateAllRooms();
+                                        serviceUI.ReservateAllFreeRooms();
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "3": //Leave all rooms
@@ -101,7 +98,6 @@
                         Console.WriteLine();
                         serviceUI.DisplayMenu();
                         break;
-
                 }
             }
         }

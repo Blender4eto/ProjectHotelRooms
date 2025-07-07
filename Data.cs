@@ -11,11 +11,8 @@ namespace ProjectHotelRooms
 {
     using System.Text.Json;
     using static Constants;
-    using static ServiceUI;
     public  class Data
     {
-        
-
         public List<Room> Rooms { get; private set; }
         public List<Room> DefaultRooms { get; private set; }
         public string SelectedFilePath = filePath3;
@@ -26,15 +23,11 @@ namespace ProjectHotelRooms
 
         public Data()
         {
-            
             LoadRooms();
         }
 
         //-------------Main file operations----------------
      
-
-        
-
         public void Save()
         {
             StreamWriter writer = new StreamWriter(SelectedFilePath);
@@ -68,17 +61,17 @@ namespace ProjectHotelRooms
         }
 
         //-------------Display methods----------------
-        public List<Room> DisplayAllRooms()
+        public List<Room> ReturnAllRooms()
         {
             return Rooms;
         }
 
-        public List<Room> DisplayAvaibleRooms()
+        public List<Room> ReturnAvaibleRooms()
         {
             return Rooms.Where(r => !r.Occupied).ToList();
         }
 
-        public List<Room> DisplayOccupiedRooms()
+        public List<Room> ReturnOccupiedRooms()
         {
             return Rooms.Where(r => r.Occupied).ToList();
         }

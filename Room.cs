@@ -18,7 +18,6 @@ namespace ProjectHotelRooms
 
         public Room(int RoomNumber, string Type, int Capacity, decimal PricePerNight, bool Occupied, string GuestName)
         {
-
             this.RoomNumber = RoomNumber;
             this.Type = Type;
             this.Capacity = Capacity;
