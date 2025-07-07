@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-
-namespace ProjectHotelRooms
+﻿namespace ProjectHotelRooms
 {
     using static Constants;
 
@@ -21,20 +14,6 @@ namespace ProjectHotelRooms
         public string green = "\u001b[38;2;102;255;102m";
         public string red = "\u001b[38;2;255;102;102m";
         public string reset = "\u001b[38;2;255;255;255m";
-        // TODO: Think of color of options to select
-        // TODO: admin panela pri greshen output se dublikira
-        // TODO: change Console.WriteLine(); to \n
-
-        public void DisplayHotelLogo()
-        {
-            // TODO: change logo
-            Console.WriteLine($"{blue}   _  _   __   ____  __    ____  _  _   __  ");
-            Console.WriteLine("  / )( \\ / _\\ (  __)(  )  (  __)/ )( \\ /  \\ ");
-            Console.WriteLine("  \\ \\/ //    \\ ) _) / (_/\\ ) _) \\ \\/ /(  O )");
-            Console.WriteLine($"   \\__/ \\_/\\_/(__)  \\____/(____) \\__/  \\__/ {reset}");
-            Console.WriteLine("");
-        }
-
 
         //UI за избор на хотел
         public void DisplayHotelsUI()
@@ -45,7 +24,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("2. Фокус");
             Console.WriteLine("3. Боровец");
             Console.WriteLine($"{pink}----------------------------------------------{reset}");
-            Console.Write($"Моля въведете вашия избор: {pink}");
+            Console.Write($"{reset}Моля въведете вашия избор: {pink}");
 
             ChooseHotels();
             Console.Clear();
@@ -58,31 +37,28 @@ namespace ProjectHotelRooms
             while (true)
             {
                 string choice = Console.ReadLine();
-               
-                    switch (choice)
-                    {
-                        case "1":
-                            data.SelectedFilePath = filePath1;
-                            data.HotelName = "Черноморец";
-                            data.LoadRooms();
-                            return;
-                        case "2":
-                            data.SelectedFilePath = filePath2;
-                            data.HotelName = "Фокус";
-                            data.LoadRooms();
-                            return;
-                        case "3":
-                            data.SelectedFilePath = filePath3;
-                            data.HotelName = "Боровец";
-                            data.LoadRooms();
-                            return;
-                        default:
+                switch (choice)
+                {
+                    case "1":
+                        data.SelectedFilePath = filePath1;
+                        data.HotelName = "Черноморец";
+                        data.LoadRooms();
+                        return;
+                    case "2":
+                        data.SelectedFilePath = filePath2;
+                        data.HotelName = "Фокус";
+                        data.LoadRooms();
+                        return;
+                    case "3":
+                        data.SelectedFilePath = filePath3;
+                        data.HotelName = "Боровец";
+                        data.LoadRooms();
+                        return;
+                    default:
                         Console.Write($"\n{red}Невалидна опция! Моля изберете 1-3.{reset}\n");
                         Console.Write($"{reset}Опитайте отново: {pink}");
                         break;
-                    }
-                
-               
+                }
             }
         }
 
@@ -92,7 +68,7 @@ namespace ProjectHotelRooms
         public void DisplayMenu()
         {
             Console.WriteLine($"{yellow}-----------------Хотел {data.HotelName}-----------------{reset}");
-            Console.WriteLine($"Списък с предлагани услуги:");
+            Console.WriteLine($"{cyan}Списък с предлагани услуги:{reset}");
             Console.WriteLine("1. Резервиране на стая");
             Console.WriteLine("2. Освобождаване на стая");
             Console.WriteLine("3. Проверка на наличността и цените на стаите");
@@ -101,7 +77,7 @@ namespace ProjectHotelRooms
             Console.WriteLine("6. Админ панел");
             Console.WriteLine($"x. Изход от програмата");
             Console.WriteLine($"{yellow}--------------------------------------------------{reset}");
-            Console.Write($"{pink}Моля въведете вашия избор: {pink}");
+            Console.Write($"{reset}Моля въведете вашия избор: {pink}");
         }
 
         //----------------------Reservate room------------------------------------
@@ -109,8 +85,8 @@ namespace ProjectHotelRooms
         public void ReservateRoom()
         {
             Console.Clear();
-            Console.WriteLine($"\n{cyan}---------Резервиране на стая в {data.HotelName}---------{reset}");
-            Console.WriteLine($"{pink}Списък със свободни стаи:{reset}");
+            Console.WriteLine($"\n{cyan}---------Резервиране на стая---------{reset}");
+            Console.WriteLine($"{cyan}Списък със свободни стаи:{reset}");
             DisplayAvaibleRoom();
             Console.WriteLine($"{cyan}--------------------------------------------------{reset}");
 
@@ -167,18 +143,18 @@ namespace ProjectHotelRooms
         public void LeaveRoom()
         {
             Console.Clear();
-            Console.WriteLine($"\n{cyan}---------------Освобождаване на стая в {data.HotelName}--------------{reset}");
+            Console.WriteLine($"\n{cyan}---------------Освобождаване на стая--------------{reset}");
 
             List<Room> occupiedRooms = data.ReturnOccupiedRooms();
             List<Room> occupiedRoomsByPerson = new List<Room>(); //лист с заетите стаи от конкретен гост
 
             if (occupiedRooms.Count != 0)
             {
-                Console.WriteLine($"{pink}Списък със заети стаи:{reset}");
+                Console.WriteLine($"{cyan}Списък със заети стаи:{reset}");
                 DisplayOccupiedRoom();
                 Console.WriteLine($"{cyan}--------------------------------------------------{reset}");
 
-                Console.Write($"Моля въведете името на госта, който освобождава стаята: {pink}");
+                Console.Write($"{reset}Моля въведете името на госта, който освобождава стаята: {pink}");
                 //написване на името с главна буква
                 string guestName = Console.ReadLine().ToLower();
                 guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
@@ -197,7 +173,7 @@ namespace ProjectHotelRooms
                 if (occupiedRoomsByPerson != null && occupiedRoomsByPerson.Count > 1)
                 {
                     Console.WriteLine($"{reset}Гостът {pink}{guestName}{reset} има {pink}{occupiedRoomsByPerson.Count}{reset} резервации.");
-                    Console.WriteLine($"{pink}Списък с резервациите на госта:{reset}");
+                    Console.WriteLine($"{cyan}Списък с резервациите на госта:{reset}");
                     foreach (var room in occupiedRoomsByPerson)
                     {
                         Console.WriteLine($"| Стая номер {pink}{room.RoomNumber}{reset}, Вид: {pink}{room.Type}{reset}, Гост: {pink}{room.GuestName}{reset}");
@@ -447,30 +423,36 @@ namespace ProjectHotelRooms
         public void LeaveAllRooms()
         {
             Console.Clear();
-            // TODO: add a option to leave selected rooms + option to kick out guest and leave all his rooms
-            //TODO: check if any of the rooms are already empty
 
-            Console.WriteLine($"\n{cyan}-----------Освобождаване на всички стаи в {data.HotelName}-----------{reset}");
-
-            foreach (var room in data.Rooms) //освобождаване на всички стаи
+            List<Room> occupiedRooms = data.ReturnOccupiedRooms(); //списък със заети стаи
+            if (occupiedRooms.Count != 0) //проверка дали има заети стаи
             {
-                room.Occupied = false;
-                room.GuestName = null;
+                foreach (var room in data.Rooms) //освобождаване на всички стаи
+                {
+                    room.Occupied = false;
+                    room.GuestName = null;
+                }
+                Console.Clear();
+                Console.WriteLine($"{green}Всички стаи са освободени.{reset}");
+                data.Save();
             }
-            Console.Clear();
-            Console.WriteLine($"{green}Всички стаи са освободени.{reset}");
-            data.Save();
+            else
+            {
+                Console.Clear();
+                Console.WriteLine($"{red}Няма заети стаи за освобождаване.{reset}");
+            }
         }
 
         //----------------------Add room------------------------------------
 
+        //добавяне на стая
         public void AddRoom()
         {
             Console.Clear();
-            Console.WriteLine($"\n{cyan}--------------Създаване на нова стая в --------------{reset}");
+            Console.WriteLine($"\n{cyan}--------------Създаване на нова стая--------------{reset}");
 
             //Добавяне на номера на стаята
-            Console.Write($"Моля въведете номера на стаята: {pink}");
+            Console.Write($"{reset}Моля въведете номера на стаята: {pink}");
             int roomNumber;
             try //проверка дали input-а е валиден
             {
@@ -638,7 +620,7 @@ namespace ProjectHotelRooms
         {
             Console.Clear();
             Console.WriteLine($"\n{cyan}---------------Редактиране на стая----------------{reset}");
-            Console.WriteLine($"{pink}Списък със стаи:{reset}");
+            Console.WriteLine($"{cyan}Списък със стаи:{reset}");
             DisplayAllRooms();
             Console.WriteLine($"{cyan}--------------------------------------------------{reset}");
             Console.Write($"{reset}Въведете номера на стаята, която желаете да редактирате: {pink}");
@@ -881,7 +863,7 @@ namespace ProjectHotelRooms
         public void RemoveRoom()
         {
             Console.WriteLine($"\n{cyan}----------------Премахване на стая----------------{reset}");
-            Console.WriteLine($"{pink}Списък със стаи:{reset}");
+            Console.WriteLine($"{cyan}Списък със стаи:{reset}");
             DisplayAllRooms();
             Console.WriteLine($"{cyan}--------------------------------------------------{reset}");
             Console.Write($"{reset}Въведете номера на стаята, която желаете да премахнете: {pink}");

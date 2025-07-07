@@ -81,14 +81,13 @@
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "8": //Exit admin panel
-                                        Console.WriteLine($"{green}Излизане от админ панела...{reset}");
-                                        Console.WriteLine();
+                                        Console.WriteLine($"{green}Излизане от админ панела...{reset}\n");
                                         serviceUI.DisplayMenu();
                                         exitAdminPanel = true;
                                         break;
                                     default: // Invalid option
+                                        Console.Clear();
                                         Console.WriteLine($"{red}Въведохте невалидена опция, моля опитайте отново{reset}");
-                                        Console.WriteLine();
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                 }
@@ -96,8 +95,7 @@
                             break;
                         }
                     default: // Invalid option
-                        Console.WriteLine($"{red}Въведохте невалидена опция, моля опитайте отново{reset}");
-                        Console.WriteLine();
+                        Console.WriteLine($"{red}Въведохте невалидена опция, моля опитайте отново{reset}\n");
                         serviceUI.DisplayMenu();
                         break;
                 }
