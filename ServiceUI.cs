@@ -125,6 +125,12 @@
             Console.Write($"{reset}Моля въведете името на госта, който резервира стаята: {pink}");
             //написване на името с главна буква
             string guestName = Console.ReadLine().ToLower();
+            if (string.IsNullOrEmpty(guestName)) //проверка дали името на госта е празно
+            {
+                Console.Clear();
+                Console.WriteLine($"{red}Името на госта не може да бъде празно. Операцията е прекратена.{reset}\n");
+                return;
+            }
             guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
 
             //заемане на стаята
@@ -157,6 +163,12 @@
                 Console.Write($"{reset}Моля въведете името на госта, който освобождава стаята: {pink}");
                 //написване на името с главна буква
                 string guestName = Console.ReadLine().ToLower();
+                if (string.IsNullOrEmpty(guestName)) //проверка дали името на госта е празно
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{red}Името на госта не може да бъде празно. Операцията е прекратена.{reset}\n");
+                    return;
+                }
                 guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
 
                 Room roomToLeave = null;
@@ -172,7 +184,7 @@
                 //проверка дали госта притежава повече от една резервация
                 if (occupiedRoomsByPerson != null && occupiedRoomsByPerson.Count > 1)
                 {
-                    Console.WriteLine($"{reset}Гостът {pink}{guestName}{reset} има {pink}{occupiedRoomsByPerson.Count}{reset} резервации.");
+                    Console.WriteLine($"\n{reset}Гостът {pink}{guestName}{reset} има {pink}{occupiedRoomsByPerson.Count}{reset} резервации.");
                     Console.WriteLine($"{cyan}Списък с резервациите на госта:{reset}");
                     foreach (var room in occupiedRoomsByPerson)
                     {
@@ -570,7 +582,7 @@
             Console.Write($"{reset}Моля въведете дали стаята да е заета (да/не): {pink}");
             bool isOccupied;
             string guestName;
-            switch (Console.ReadLine()?.ToLower())
+            switch (Console.ReadLine().ToLower())
             {
                 //в случай че се използва друга клавиатура
                 case "да":
@@ -598,13 +610,12 @@
                     guestName = null;
                     break;
                 default:
-                    Console.Clear();
-                    Console.WriteLine($"{red}Невалиден отговор. Стаята ще бъде добавена като свободна.{reset}");
                     isOccupied = false;
                     guestName = null;
-                    break;
+                    Console.Clear();
+                    Console.WriteLine($"{red}Невалиден отговор. Стаята ще бъде добавена като свободна.{reset}");
+                    return;
             }
-
             //добавяне на новата стая
             Room newRoom = new Room(roomNumber, type, capacity, pricePerNight, isOccupied, guestName);
             data.Rooms.Add(newRoom);
