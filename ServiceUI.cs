@@ -57,35 +57,32 @@ namespace ProjectHotelRooms
             //избор на хотел
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out int choice)) //проверка дали input-a е валиден
-                {
+                string choice = Console.ReadLine();
+               
                     switch (choice)
                     {
-                        case 1:
+                        case "1":
                             data.SelectedFilePath = filePath1;
                             data.HotelName = "Черноморец";
                             data.LoadRooms();
                             return;
-                        case 2:
+                        case "2":
                             data.SelectedFilePath = filePath2;
                             data.HotelName = "Фокус";
                             data.LoadRooms();
                             return;
-                        case 3:
+                        case "3":
                             data.SelectedFilePath = filePath3;
                             data.HotelName = "Боровец";
                             data.LoadRooms();
                             return;
                         default:
-                            Console.WriteLine($"{red}Невалидна опция! Моля изберете 1-3.{reset}\n");
-                            DisplayHotelsUI();
-                            break;
+                        Console.Write($"\n{red}Невалидна опция! Моля изберете 1-3.{reset}\n");
+                        Console.Write($"{reset}Опитайте отново: {pink}");
+                        break;
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"{red}Моля въведете число 1-3.{reset}");
-                }
+                
+               
             }
         }
 
