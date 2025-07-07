@@ -4,9 +4,11 @@
     {
         public static void Main(string[] args)
         {
-            
             ServiceUI serviceUI = new ServiceUI();
-            serviceUI.DisplayHotelLogo();
+
+            string red = "\u001b[38;2;255;102;102m";
+            string green = "\u001b[38;2;102;255;102m";
+            string reset = "\u001b[0m";
 
             serviceUI.DisplayHotelsUI();
             serviceUI.DisplayMenu();
@@ -79,13 +81,13 @@
                                         serviceUI.DisplayAdminMenu();
                                         break;
                                     case "8": //Exit admin panel
-                                        Console.WriteLine("Излизане от админ панела...");
+                                        Console.WriteLine($"{green}Излизане от админ панела...{reset}");
                                         Console.WriteLine();
                                         serviceUI.DisplayMenu();
                                         exitAdminPanel = true;
                                         break;
                                     default: // Invalid option
-                                        Console.WriteLine("Въведохте невалидена опция, моля опитайте отново");
+                                        Console.WriteLine($"{red}Въведохте невалидена опция, моля опитайте отново{reset}");
                                         Console.WriteLine();
                                         serviceUI.DisplayAdminMenu();
                                         break;
@@ -94,7 +96,7 @@
                             break;
                         }
                     default: // Invalid option
-                        Console.WriteLine("Въведохте невалидена опция, моля опитайте отново");
+                        Console.WriteLine($"{red}Въведохте невалидена опция, моля опитайте отново{reset}");
                         Console.WriteLine();
                         serviceUI.DisplayMenu();
                         break;
