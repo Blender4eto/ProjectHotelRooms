@@ -63,7 +63,6 @@ namespace ProjectHotelRooms
         {
             while (true)
             {
-                Console.WriteLine("Изберете хотел (1-3):");
                 if (int.TryParse(Console.ReadLine(), out int choice))
                 {
                     switch (choice)
