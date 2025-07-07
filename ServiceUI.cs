@@ -670,6 +670,7 @@ namespace ProjectHotelRooms
 
         public void EditRoom()
         {
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("---------------Редактиране на стая----------------");
             Console.WriteLine("Списък със стаи:");
@@ -692,12 +693,14 @@ namespace ProjectHotelRooms
                 }
                 if (roomToEdit == null)
                 {
+                    Console.Clear();
                     Console.WriteLine("Стая с този номер не съществува. Операцията е прекратена.");
                     return;
                 }
             }
             catch
             {
+                Console.Clear();
                 Console.WriteLine("Невалиден номер на стая. Операцията е прекратена.");
                 return;
             }
@@ -721,14 +724,17 @@ namespace ProjectHotelRooms
                         int newRoomNumber = int.Parse(Console.ReadLine());
                         if (data.Rooms.Any(r => r.RoomNumber == newRoomNumber))
                         {
+                            Console.Clear();
                             Console.WriteLine("Стая с този номер вече съществува. Операцията е прекратена.");
                             return;
                         }
+                        Console.Clear();
                         roomToEdit.RoomNumber = newRoomNumber;
                         Console.WriteLine($"Номера на стаята е успешно променен на {newRoomNumber}.");
                     }
                     catch
                     {
+                        Console.Clear();
                         Console.WriteLine("Невалиден номер на стая. Операцията е прекратена.");
                         return;
                     }
@@ -769,6 +775,7 @@ namespace ProjectHotelRooms
 
                             if (string.IsNullOrEmpty(newType) || newType.All(char.IsDigit))
                             {
+                                Console.Clear();
                                 Console.WriteLine("Типът на стаята не може да бъде празен или да съдържа число. Операцията е прекратена.");
                                 return;
                             }
@@ -780,26 +787,31 @@ namespace ProjectHotelRooms
                                 newCapacity = int.Parse(Console.ReadLine());
                                 if (newCapacity <= 0)
                                 {
+                                    Console.Clear();
                                     Console.WriteLine("Капацитетът на стаята трябва да бъде положително число. Операцията е прекратена.");
                                     return;
                                 }
                                 roomToEdit.Capacity = newCapacity;
                                 data.Save();
+                                Console.Clear();
                                 Console.WriteLine($"Капацитетът на стаята е успешно променен на {newCapacity}.");
                             }
                             catch
                             {
+                                Console.Clear();
                                 Console.WriteLine("Невалиден капацитет на стаята. Операцията е прекратена.");
                                 return;
                             }
                             break;
 
                         default:
+                            Console.Clear();
                             Console.WriteLine("Невалиден тип на стаята. Операцията е прекратена.");
                             return;
                     }
                     roomToEdit.Type = newType;
                     data.Save();
+                    Console.Clear();
                     Console.WriteLine($"Типът на стаята е успешно променен на {newType}.");
                     break;
                 case "3": //Edit room price
@@ -810,16 +822,19 @@ namespace ProjectHotelRooms
                         newPricePerNight = decimal.Parse(Console.ReadLine());
                         if (newPricePerNight <= 0)
                         {
+                            Console.Clear();
                             Console.WriteLine("Цената на стаята трябва да бъде положително число. Операцията е прекратена.");
                             return;
                         }
                         newPricePerNight = Math.Round(newPricePerNight, 2); //not working fully, maybe it will be deleted later
                         roomToEdit.PricePerNight = newPricePerNight;
                         data.Save();
+                        Console.Clear();
                         Console.WriteLine($"Цената на стаята е успешно променена на {newPricePerNight} лв. на нощувка.");
                     }
                     catch
                     {
+                        Console.Clear();
                         Console.WriteLine("Невалидна цена на стаята. Операцията е прекратена.");
                         return;
                     }
@@ -827,6 +842,7 @@ namespace ProjectHotelRooms
                 case "4": //Edit room status
                     if (roomToEdit.Occupied)
                     {
+                        Console.Clear();
                         roomToEdit.Occupied = false;
                         Console.WriteLine($"Стая номер {roomToEdit.RoomNumber} е успешно освободена.");
                     }
@@ -838,12 +854,13 @@ namespace ProjectHotelRooms
 
                         if (string.IsNullOrEmpty(guestName))
                         {
+                            Console.Clear();
                             Console.WriteLine("Името на госта не може да бъде празно. Операцията е прекратена.");
                             return;
                         }
                         guestName = char.ToUpper(guestName[0]) + guestName.Substring(1);
                         roomToEdit.GuestName = guestName;
-
+                        Console.Clear();
                         Console.WriteLine($"Стая номер {roomToEdit.RoomNumber} е успешно резервирана за {guestName}.");
                     }
                     data.Save();
@@ -857,23 +874,28 @@ namespace ProjectHotelRooms
 
                         if (string.IsNullOrEmpty(newGuestName))
                         {
+                            Console.Clear();
                             Console.WriteLine("Името на госта не може да бъде празно. Операцията е прекратена.");
                             return;
                         }
                         newGuestName = char.ToUpper(newGuestName[0]) + newGuestName.Substring(1);
                         roomToEdit.GuestName = newGuestName;
                         data.Save();
+                        Console.Clear();
                         Console.WriteLine($"Името на госта е успешно променено на {newGuestName}.");
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("Стаята не е заета. Няма нужда от промяна на името на госта.");
                     }
                     break;
                 case "6":
+                    Console.Clear();
                     Console.WriteLine("Изход от редактирането на стаята.");
                     return;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Невалиден избор. Операцията е прекратена.");
                     return;
             }
@@ -895,13 +917,16 @@ namespace ProjectHotelRooms
                 roomNumber = int.Parse(Console.ReadLine());
             }
             catch
+
             {
+                Console.Clear();
                 Console.WriteLine("Невалиден номер на стая. Операцията е прекратена.");
                 return;
             }
 
             if (!data.Rooms.Any(r => r.RoomNumber == roomNumber))
             {
+                Console.Clear();
                 Console.WriteLine("Стая с този номер не съществува. Операцията е прекратена.");
                 return;
             }
@@ -910,6 +935,7 @@ namespace ProjectHotelRooms
                 if (room.RoomNumber == roomNumber)
                 {
                     data.Rooms.Remove(room);
+                    Console.Clear();
                     Console.WriteLine($"Стая номер {room.RoomNumber} е успешно премахната.");
                     data.Save();
                     return;
@@ -929,14 +955,17 @@ namespace ProjectHotelRooms
                 case "da":
                 case "yes":
                     data.ResetRoomsToDefault();
+                    Console.Clear();
                     Console.WriteLine("Възстановяване на списъка...");
                     break;
                 case "не":
                 case "ne":
                 case "no":
+                    Console.Clear();
                     Console.WriteLine("Възстановяването е отменено.");
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Невалиден отговор. Вие ще бъдете върнати в админ панела.");
                     break;
             }
