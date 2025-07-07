@@ -21,7 +21,7 @@
             Console.Clear();
             Console.WriteLine($"{pink}-----------------Избери Хотел-----------------{reset}");
             Console.WriteLine("1. Черноморец");
-            Console.WriteLine("2. Фокус");
+            Console.WriteLine("2. Вафлево");
             Console.WriteLine("3. Боровец");
             Console.WriteLine($"{pink}----------------------------------------------{reset}");
             Console.Write($"{reset}Моля въведете вашия избор: {pink}");
@@ -46,7 +46,7 @@
                         return;
                     case "2":
                         data.SelectedFilePath = filePath2;
-                        data.HotelName = "Фокус";
+                        data.HotelName = "Вафлево";
                         data.LoadRooms();
                         return;
                     case "3":
@@ -862,6 +862,7 @@
         //премахване на стая
         public void RemoveRoom()
         {
+            Console.Clear();
             Console.WriteLine($"\n{cyan}----------------Премахване на стая----------------{reset}");
             Console.WriteLine($"{cyan}Списък със стаи:{reset}");
             DisplayAllRooms();
